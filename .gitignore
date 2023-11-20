@@ -1,5 +1,2 @@
 .venv
-/src/__pycache__/*
-/src/controladores/__pycache__/*
-/src/modelos/__pycache__/*
-/src/visuais/__pycache__/*
+__pycache__/
