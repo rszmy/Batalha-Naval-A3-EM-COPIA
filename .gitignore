@@ -1,3 +1,5 @@
-Batalha_Naval_Banco.sqlite
 .venv
 __pycache__/
+database/*.sqlite
+database/*.sqlite3
+database/*.dat
