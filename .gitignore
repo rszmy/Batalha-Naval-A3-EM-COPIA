@@ -3,6 +3,6 @@ __pycache__/
 database/*.sqlite
 database/*.sqlite3
 database/*.dat
-src/*.sqlite
-src/*.sqlite3
-src/*.dat
+*.sqlite
+*.sqlite3
+*.dat
