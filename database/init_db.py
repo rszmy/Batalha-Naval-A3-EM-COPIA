@@ -6,7 +6,7 @@ def executa_sql(codigo_sql):
     with sqlite3.connect(arquivo_banco) as conn:
         try:
             cursor = conn.cursor()
-            res = cursor.execute(codigo_sql)
+            cursor.execute(codigo_sql)
         except sqlite3.Error as e:
             print(e)
 
