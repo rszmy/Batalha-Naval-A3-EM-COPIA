@@ -13,25 +13,26 @@ async def menu():
 
 @app.get("/jogadores/lista_de_jogadores")
 async def listar_jogadores():
-    return JogadorControlador.get_instance().lista_todos_os_jogadores()
+    return JogadorControlador.get_instance().listar_todos_os_jogadores()
 
-@app.put("/jogadores/registro/{nome}/{idade}")
-def adicionar_jogador(nome: str, idade: int):
-    pass
-    # return PessoasController.insere_pessoa(idade, nome)
+@app.get("/jogadores/ranking")
+async def listar_jogadores():
+    return JogadorControlador.get_instance().listar_ranking()
+
+@app.get("/jogadores/ranking/top3")
+async def ranking_top3():
+    return JogadorControlador.get_instance().listar_ranking_top_3()
+
+@app.put("/jogadores/registro/{nome}/{email}/{senha}")
+def adicionar_jogador(nome: str, email: str, senha: str):
+    return JogadorControlador.get_instance().adicionar_jogador()
+
+@app.patch("/jogadores/edição/{nome}/{email}")
+def editar_jogador_por_nome(nome: str, email: str):
+    return JogadorControlador.get_instance().editar_jogador_por_nome()
 
 @app.delete("/jogadores/remoção/{nome}")
 def remover_jogador_por_nome(nome: str):
-    pass
-    # return PessoasController.remove_por_nome(nome)
-
-@app.patch("/jogadores/edição/{nome}/{idade}")
-def editar_jogador_por_nome(nome: str, idade: int):
-    pass 
-    # return PessoasController.editar_idade(nome, idade)
-
-@app.get("/jogadores/top3")
-async def ranking_top3():
-    return JogadorControlador.get_instance().lista_ranking_top_3()
+    return JogadorControlador.get_instance().remover_jogador_por_nome()
 
 # ========================== Auth

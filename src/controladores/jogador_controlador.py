@@ -14,25 +14,44 @@ class JogadorControlador:
             cls._instance = JogadorControlador()
         return cls._instance
     
-    def lista_todos_os_jogadores(self):
-        return self._db.lista_todos_os_jogadores()
-    
-    def lista_ranking_top_3(self):
-        jogadores = self._db.lista_todos_os_jogadores()
+    def filtrar_lista_de_jogadores(self):
+        jogadores = self._db.listar_todos_os_jogadores()
         
         jogadores_dto = []
         for jogador in jogadores:
 
             jogadores_dto.append({
                 "nome": jogador._nome,
-                "pontuacao": int(jogador._pontuacao_acumulada)
+                "pontuacao": int(jogador._pontuacao_acumulada),
+                "email": jogador._email
             })
 
-        def criterio(jogador_dto):
-            return - jogador_dto["pontuacao"]
+        lista_filtrada : [] = jogadores_dto
 
-        # ordenar o vetor, do maior ao menor, pelo score
-        v_ordenado = sorted(jogadores_dto, key=criterio)
+        return lista_filtrada
+    
+    def listar_todos_os_jogadores(self):
+        return self.filtrar_lista_de_jogadores()
+    
+    def listar_ranking(self):
+        lista_de_jogadores = self.filtrar_lista_de_jogadores()
 
-        # DTO => data transfer object
-        return v_ordenado[:3]   # syntax sugar
+        def criterio(lista_de_jogadores):
+            return - lista_de_jogadores["pontuacao"]
+
+        ranking_ordenado = sorted(lista_de_jogadores, key=criterio)
+
+        return ranking_ordenado
+        
+    def listar_ranking_top_3(self):
+        ranking_ordenado = self.listar_ranking()
+        return ranking_ordenado[:3]   
+    
+    def adicionar_jogador(self):
+        pass
+    
+    def editar_jogador_por_nome(self):
+        pass
+
+    def remover_jogador_por_nome(self):
+        pass

@@ -5,7 +5,10 @@ class JogadorDB():
 
     _lista_de_jogadores : list = []
 
-    def popula_do_banco(self):
+    def __init__(self):
+        self.popular_do_banco()
+
+    def popular_do_banco(self):
         # lê do banco de dados
         with sqlite3.connect("../batalha_naval.sqlite") as conn:
             cursor = conn.cursor()
@@ -20,8 +23,14 @@ class JogadorDB():
                 j._pontuacao_acumulada = r[4]
                 self._lista_de_jogadores.append(j)
 
-    def __init__(self):
-        self.popula_do_banco()
-         
-    def lista_todos_os_jogadores(self):
+    def listar_todos_os_jogadores(self):
         return self._lista_de_jogadores
+    
+    def inserir_jogador_no_banco(self):
+        pass
+    
+    def editar_jogador_no_banco(self):
+        pass
+
+    def remover_jogador_do_banco(self):
+        pass
