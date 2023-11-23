@@ -28,12 +28,12 @@ class JogadorDB():
     
     def inserir_jogador_no_banco(self, jogador: Jogador):
 
-        # sqlite_insert_with_param = """INSERT INTO Jogadores (id, nome, pontuacao, email, senha) VALUES (?, ?, ?, ?, ?);"""
-        # data_tuple = (5, jogador._nome, jogador._pontuacao_acumulada, jogador._email, jogador._senha)
+        sqlite_insert_with_param = """INSERT INTO Jogadores (nome, pontuacao, email, senha) VALUES (?, ?, ?, ?);"""
+        data_tuple = (jogador._nome, jogador._pontuacao_acumulada, jogador._email, jogador._senha)
 
-        # with sqlite3.connect("../batalha_naval.sqlite") as conn:
-        #     cursor = conn.cursor()
-        #     cursor.execute(sqlite_insert_with_param, data_tuple)
+        with sqlite3.connect("../batalha_naval.sqlite") as conn:
+            cursor = conn.cursor()
+            cursor.execute(sqlite_insert_with_param, data_tuple)
         
         self._lista_de_jogadores.append(jogador)
     

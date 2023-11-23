@@ -12,22 +12,21 @@ def executa_sql(codigo_sql):
 
 sql_create_table_jogador = '''
     CREATE TABLE Jogadores(
-        id INTEGER,
+        id INTEGER PRIMARY KEY,
         pontuacao INTEGER DEFAULT 0,
         nome TEXT,
         email TEXT,
-        senha TEXT,
-        PRIMARY KEY(id)
+        senha TEXT
     );
 '''
 
 sql_popula_table_jogadores = [
-    "INSERT INTO Jogadores (id, nome, pontuacao, email, senha) VALUES (0, 'Admin', 0; 'admin@admin.com', '!@$%$#5%');",
-    "INSERT INTO Jogadores (id, nome, pontuacao, email, senha) VALUES (1, 'Guilherme Ferrari', 1, 'guilherme@guilherme.com','!#%$¨@!');",
-    "INSERT INTO Jogadores (id, nome, pontuacao, email, senha) VALUES (2, 'João Otávio Neumann', 2,  'joao@joao.com','!#%$¨@!');",
-    "INSERT INTO Jogadores (id, nome, pontuacao, email, senha) VALUES (3, 'Luigi Veloso', 3,  'luigi@luigi.com','!#%$¨@!');",
-    "INSERT INTO Jogadores (id, nome, pontuacao, email, senha) VALUES (4, 'Nicolas Oliveira', 4,  'nicolas@nicolas.com','!#%$¨@!');",
-    "INSERT INTO Jogadores (id, nome, pontuacao, email, senha) VALUES (5, 'Teste', 5,  'teste@teste.com','!#%$¨@!');"
+    "INSERT INTO Jogadores (nome, pontuacao, email, senha) VALUES ('Admin', 0; 'admin@admin.com', '!@$%$#5%');",
+    "INSERT INTO Jogadores (nome, pontuacao, email, senha) VALUES ('Guilherme Ferrari', 1, 'guilherme@guilherme.com','!#%$¨@!');",
+    "INSERT INTO Jogadores (nome, pontuacao, email, senha) VALUES ('João Otávio Neumann', 2,  'joao@joao.com','!#%$¨@!');",
+    "INSERT INTO Jogadores (nome, pontuacao, email, senha) VALUES ('Luigi Veloso', 3,  'luigi@luigi.com','!#%$¨@!');",
+    "INSERT INTO Jogadores (nome, pontuacao, email, senha) VALUES ('Nicolas Oliveira', 4,  'nicolas@nicolas.com','!#%$¨@!');",
+    "INSERT INTO Jogadores (nome, pontuacao, email, senha) VALUES ('Teste', 5,  'teste@teste.com','!#%$¨@!');"
 ]
 
 # Cria tabela jogador
