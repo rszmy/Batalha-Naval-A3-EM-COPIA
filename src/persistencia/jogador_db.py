@@ -40,5 +40,7 @@ class JogadorDB():
     def editar_jogador_no_banco(self):
         pass
 
-    def remover_jogador_do_banco(self):
-        pass
+    def remover_jogador_do_banco(self, nome: str):
+        tam : int = len(self._lista_de_jogadores)
+        self._lista_de_jogadores = [p for p in self._lista_de_jogadores if p._nome != nome]
+        return (tam != len(self._lista_de_jogadores))

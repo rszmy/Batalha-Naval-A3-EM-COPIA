@@ -33,6 +33,6 @@ def editar_jogador_por_nome(nome: str, email: str):
 
 @app.delete("/jogadores/remoção/{nome}")
 def remover_jogador_por_nome(nome: str):
-    return JogadorControlador.get_instance().remover_jogador_por_nome()
+    return JogadorControlador.get_instance().remover_jogador_por_nome(nome)
 
 # ========================== Auth
