@@ -29,7 +29,7 @@ def adicionar_jogador(nome: str, email: str, senha: str):
 
 @app.patch("/jogadores/edição/{nome}/{email}")
 def editar_jogador_por_nome(nome: str, email: str):
-    return JogadorControlador.get_instance().editar_jogador_por_nome()
+    return JogadorControlador.get_instance().editar_jogador_por_nome(nome, email)
 
 @app.delete("/jogadores/remoção/{nome}")
 def remover_jogador_por_nome(nome: str):

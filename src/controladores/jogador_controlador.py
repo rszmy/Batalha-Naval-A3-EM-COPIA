@@ -54,13 +54,13 @@ class JogadorControlador:
     
     
     @classmethod
-    def adicionar_jogador(cls, nome : str, email : str, senha : str):
+    def adicionar_jogador(cls, nome: str, email: str, senha: str):
         j : Jogador = Jogador(nome, email, senha)
         cls.get_instance()._db.inserir_jogador_no_banco(j)
 
     @classmethod
-    def editar_jogador_por_nome(cls):
-        pass
+    def editar_jogador_por_nome(cls, nome: str, email: str):
+        cls.get_instance()._db.editar_jogador_no_banco(nome, email)
 
     @classmethod
     def remover_jogador_por_nome(cls, nome: str):

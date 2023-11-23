@@ -37,8 +37,14 @@ class JogadorDB():
         
         self._lista_de_jogadores.append(jogador)
     
-    def editar_jogador_no_banco(self):
-        pass
+    def editar_jogador_no_banco(self, nome: str, email: str):
+        lista_filtrada : list[Jogador] = [x for x in self._lista_de_jogadores if x._nome == nome]
+        if(len(lista_filtrada) == 0):
+            return False
+        else:
+            jogador_alvo : Jogador = lista_filtrada[0]
+            jogador_alvo._email = email
+            return True
 
     def remover_jogador_do_banco(self, nome: str):
         tam : int = len(self._lista_de_jogadores)
