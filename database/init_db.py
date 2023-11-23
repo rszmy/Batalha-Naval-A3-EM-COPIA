@@ -14,7 +14,7 @@ sql_create_table_jogador = '''
     CREATE TABLE Jogadores(
         id INTEGER PRIMARY KEY,
         pontuacao INTEGER DEFAULT 0,
-        nome TEXT,
+        nome TEXT UNIQUE,
         email TEXT,
         senha TEXT
     );

@@ -1,4 +1,5 @@
 from modelos.jogador import Jogador
+from persistencia.config_db import ConfigDB
 import sqlite3
 
 class JogadorDB():
@@ -10,30 +11,24 @@ class JogadorDB():
 
     def popular_do_banco(self):
 
-        with sqlite3.connect("../batalha_naval.sqlite") as conn:
-            cursor = conn.cursor()
-            res = cursor.execute("SELECT id, nome, email, senha, pontuacao FROM Jogadores")
+        res = ConfigDB.executa_sql("SELECT id, nome, email, senha, pontuacao FROM Jogadores", False)
 
-            for r in res:
-                j : Jogador = Jogador(
-                    nome=r[1],
-                    email=r[2],
-                    senha=r[3]
-                )
-                j._pontuacao_acumulada = r[4]
-                self._lista_de_jogadores.append(j)
+        for r in res:
+            j : Jogador = Jogador(
+                nome=r[1],
+                email=r[2],
+                senha=r[3]
+            )
+            j._pontuacao_acumulada = r[4]
+            self._lista_de_jogadores.append(j)
 
     def listar_todos_os_jogadores(self):
         return self._lista_de_jogadores
     
     def inserir_jogador_no_banco(self, jogador: Jogador):
-
-        sqlite_insert_with_param = """INSERT INTO Jogadores (nome, pontuacao, email, senha) VALUES (?, ?, ?, ?);"""
-        data_tuple = (jogador._nome, jogador._pontuacao_acumulada, jogador._email, jogador._senha)
-
-        with sqlite3.connect("../batalha_naval.sqlite") as conn:
-            cursor = conn.cursor()
-            cursor.execute(sqlite_insert_with_param, data_tuple)
+        sqlite_insert_parametro = """INSERT INTO Jogadores (nome, pontuacao, email, senha) VALUES (?, ?, ?, ?);"""
+        valores = (jogador._nome, jogador._pontuacao_acumulada, jogador._email, jogador._senha)
+        ConfigDB.executa_sql(sqlite_insert_parametro, valores)
         
         self._lista_de_jogadores.append(jogador)
     
