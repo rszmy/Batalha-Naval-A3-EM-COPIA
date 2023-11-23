@@ -9,7 +9,7 @@ class JogadorDB():
         self.popular_do_banco()
 
     def popular_do_banco(self):
-        # lê do banco de dados
+
         with sqlite3.connect("../batalha_naval.sqlite") as conn:
             cursor = conn.cursor()
             res = cursor.execute("SELECT id, nome, email, senha, pontuacao FROM Jogadores")
@@ -26,8 +26,16 @@ class JogadorDB():
     def listar_todos_os_jogadores(self):
         return self._lista_de_jogadores
     
-    def inserir_jogador_no_banco(self):
-        pass
+    def inserir_jogador_no_banco(self, jogador: Jogador):
+
+        # sqlite_insert_with_param = """INSERT INTO Jogadores (id, nome, pontuacao, email, senha) VALUES (?, ?, ?, ?, ?);"""
+        # data_tuple = (5, jogador._nome, jogador._pontuacao_acumulada, jogador._email, jogador._senha)
+
+        # with sqlite3.connect("../batalha_naval.sqlite") as conn:
+        #     cursor = conn.cursor()
+        #     cursor.execute(sqlite_insert_with_param, data_tuple)
+        
+        self._lista_de_jogadores.append(jogador)
     
     def editar_jogador_no_banco(self):
         pass

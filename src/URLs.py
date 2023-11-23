@@ -25,7 +25,7 @@ async def ranking_top3():
 
 @app.put("/jogadores/registro/{nome}/{email}/{senha}")
 def adicionar_jogador(nome: str, email: str, senha: str):
-    return JogadorControlador.get_instance().adicionar_jogador()
+    return JogadorControlador.get_instance().adicionar_jogador(nome, email, senha)
 
 @app.patch("/jogadores/edição/{nome}/{email}")
 def editar_jogador_por_nome(nome: str, email: str):
