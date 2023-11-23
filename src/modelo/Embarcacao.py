@@ -1,13 +1,14 @@
+#classe embarcações
 class Embarcacao():
     
     _nome : str
-    _formato : []
+    _formato = []
     
     def __init__(self, nome, formato):
         self._nome = nome
         self._formato = formato
 
-
+#constroi as embarcações
 class FabricaEmbarcacao():
     
     @classmethod
