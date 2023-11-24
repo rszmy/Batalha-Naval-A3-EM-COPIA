@@ -1,7 +1,8 @@
 from typing import Union
 from fastapi import FastAPI
-from controladores.main_controlador import MainControlador
 from controladores.jogador_controlador import JogadorControlador
+from controladores.embarcacao_controlador import EmbarcacoesControlador
+from controladores.tabuleiro_controlador import TabuleiroControlador
 
 app = FastAPI()
 
@@ -36,3 +37,8 @@ def remover_jogador_por_nome(nome: str):
     return JogadorControlador.get_instance().remover_jogador_por_nome(nome)
 
 # ========================== Auth
+
+# ========================== Tabuleiro
+@app.get("/tabuleiro")
+async def mostrar_tabuleiro():
+    return TabuleiroControlador.get_instance().representacao_tabuleiro()

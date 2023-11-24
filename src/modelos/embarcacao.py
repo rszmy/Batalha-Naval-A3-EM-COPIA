@@ -2,7 +2,7 @@
 class Embarcacao():
     
     _nome : str
-    _formato = []
+    _formato : []
     
     def __init__(self, nome, formato):
         self._nome = nome
