@@ -51,8 +51,7 @@ class JogadorControlador:
     def listar_ranking_top_3(cls):
         ranking_ordenado = cls.get_instance().listar_ranking()
         return ranking_ordenado[:3]   
-    
-    
+
     @classmethod
     def adicionar_jogador(cls, nome: str, email: str, senha: str):
         j : Jogador = Jogador(nome, email, senha)
