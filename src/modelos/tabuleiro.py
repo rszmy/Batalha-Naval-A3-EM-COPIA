@@ -1,4 +1,4 @@
-# from modelos.embarcacao import Embarcacao, FabricaEmbarcacao
+from modelos.embarcacao import Embarcacao, FabricaEmbarcacao
 
 class TabuleiroParte():
 
@@ -77,16 +77,16 @@ class Tabuleiro():
         except IndexError:
             return True
         return False
-
+    
+    # Numero de peças no tabuleiro
     def numero_embarcacao():
-
         embarcacoes = [
-            FabricaEmbarcacao.instance().create('Submarino')
-            FabricaEmbarcacao.instance().create('Submarino')
-            FabricaEmbarcacao.instance().create('Submarino')
-            FabricaEmbarcacao.instance().create('Navio Pequeno')
-            FabricaEmbarcacao.instance().create('Navio Pequeno')
-            FabricaEmbarcacao.instance().create('Navio Medio')
-            FabricaEmbarcacao.instance().create('Navio Grande')
+            FabricaEmbarcacao.instance().create('Submarino'),
+            FabricaEmbarcacao.instance().create('Submarino'),
+            FabricaEmbarcacao.instance().create('Submarino'),
+            FabricaEmbarcacao.instance().create('Navio Pequeno'),
+            FabricaEmbarcacao.instance().create('Navio Pequeno'),
+            FabricaEmbarcacao.instance().create('Navio Medio'),
+            FabricaEmbarcacao.instance().create('Navio Grande'),
             FabricaEmbarcacao.instance().create('Porta Aviões')
-    ]:
+        ]
