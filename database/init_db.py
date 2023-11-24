@@ -21,12 +21,12 @@ sql_create_table_jogador = '''
 '''
 
 sql_popula_table_jogadores = [
-    "INSERT INTO Jogadores (nome, pontuacao, email, senha) VALUES ('Admin', 0; 'admin@admin.com', '!@$%$#5%');",
-    "INSERT INTO Jogadores (nome, pontuacao, email, senha) VALUES ('Guilherme Ferrari', 1, 'guilherme@guilherme.com','!#%$¨@!');",
-    "INSERT INTO Jogadores (nome, pontuacao, email, senha) VALUES ('João Otávio Neumann', 2,  'joao@joao.com','!#%$¨@!');",
-    "INSERT INTO Jogadores (nome, pontuacao, email, senha) VALUES ('Luigi Veloso', 3,  'luigi@luigi.com','!#%$¨@!');",
-    "INSERT INTO Jogadores (nome, pontuacao, email, senha) VALUES ('Nicolas Oliveira', 4,  'nicolas@nicolas.com','!#%$¨@!');",
-    "INSERT INTO Jogadores (nome, pontuacao, email, senha) VALUES ('Teste', 5,  'teste@teste.com','!#%$¨@!');"
+    "INSERT INTO Jogadores (nome, pontuacao, email, senha) VALUES ('Admin', 0; 'admin@admin.com', 'e10adc3949ba59abbe56e057f20f883e');",
+    "INSERT INTO Jogadores (nome, pontuacao, email, senha) VALUES ('Guilherme Ferrari', 1, 'guilherme@guilherme.com','e10adc3949ba59abbe56e057f20f883e');",
+    "INSERT INTO Jogadores (nome, pontuacao, email, senha) VALUES ('João Otávio Neumann', 2,  'joao@joao.com','e10adc3949ba59abbe56e057f20f883e');",
+    "INSERT INTO Jogadores (nome, pontuacao, email, senha) VALUES ('Luigi Veloso', 3,  'luigi@luigi.com','e10adc3949ba59abbe56e057f20f883e');",
+    "INSERT INTO Jogadores (nome, pontuacao, email, senha) VALUES ('Nicolas Oliveira', 4,  'nicolas@nicolas.com','e10adc3949ba59abbe56e057f20f883e');",
+    "INSERT INTO Jogadores (nome, pontuacao, email, senha) VALUES ('Teste', 5,  'teste@teste.com','e10adc3949ba59abbe56e057f20f883e');"
 ]
 
 # Cria tabela jogador

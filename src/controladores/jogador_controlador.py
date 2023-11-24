@@ -1,5 +1,6 @@
 from persistencia.jogador_db import JogadorDB
 from modelos.jogador import Jogador
+import hashlib
 
 class JogadorControlador:
 
@@ -54,6 +55,8 @@ class JogadorControlador:
 
     @classmethod
     def adicionar_jogador(cls, nome: str, email: str, senha: str):
+        senha = hashlib.md5(senha.encode('utf-8'))
+        senha = senha.hexdigest()
         j : Jogador = Jogador(nome, email, senha)
         cls.get_instance()._db.inserir_jogador_no_banco(j)
 
