@@ -3,7 +3,8 @@ from controladores.embarcacao_controlador import EmbarcacoesControlador
 
 class TabuleiroControlador():
     _instance = None 
-    _tabuleiro = Tabuleiro
+    _tabuleiro = Tabuleiro()
+    
     
     @classmethod
     def get_instance(cls):
@@ -37,12 +38,14 @@ class TabuleiroControlador():
         return False
 
     @classmethod
+           
     def representacao_tabuleiro(cls):
-        representacao = ""
+        representacao = " "
         for linha in cls.get_instance()._tabuleiro._parte_a._matrix:
-             representacao += " ".join(linha) + "\n"
-        return representacao
-
+           representacao +=' '.join(linha) 
+           representacao += '\n'
+        return representacao.strip("\n")
+       
     @classmethod
     def enviar_tabuleiro(cls, jogador):
         bytes_data = bytes(cls.get_instance().representacao_tabuleiro(), 'utf-8')

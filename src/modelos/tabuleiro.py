@@ -16,16 +16,17 @@ class TabuleiroParte():
     }
 
     _matrix = [
-        [ 'XXXXXXXXXX' ],
-        [ 'XXXXXXXXXX' ],
-        [ 'XXXXXXXXXX' ],
-        [ 'XXXXXXXXXX' ],
-        [ 'XXXXXXXXXX' ],
-        [ 'XXXXXXXXXX' ],
-        [ 'XXXXXXXXXX' ],
-        [ 'XXXXXXXXXX' ],
-        [ 'XXXXXXXXXX' ],
-        [ 'XXXXXXXXXX' ]
+        ['X','X','X','X','X','X','X','X','X','X'],
+        ['X','X','X','X','X','X','X','X','X','X'],
+        ['X','X','X','X','X','X','X','X','X','X'],
+        ['X','X','X','X','X','X','X','X','X','X'],
+        ['X','X','X','X','X','X','X','X','X','X'],
+        ['X','X','X','X','X','X','X','X','X','X'],
+        ['X','X','X','X','X','X','X','X','X','X'],
+        ['X','X','X','X','X','X','X','X','X','X'],
+        ['X','X','X','X','X','X','X','X','X','X'],
+        ['X','X','X','X','X','X','X','X','X','X']
+       
     ]
 
     def set_quadrante(self, x, y, val):
@@ -42,41 +43,8 @@ class Tabuleiro():
     _parte_a : TabuleiroParte = None
     _parte_b : TabuleiroParte = None
 
-    def __init__(self, area=10):
-        self._parte_a = TabuleiroParte(area)
-        self._parte_b = TabuleiroParte(area)
+    def __init__(self):
+        self._parte_a = TabuleiroParte()
+        self._parte_b = TabuleiroParte()
 
-    # def representacao_tabuleiro(self):
-    #     representacao = ""
-    #     for linha in self._parte_a._matrix:
-    #         representacao += " ".join(linha) + "\n"
-    #     return representacao
-    
-    # def enviar_tabuleiro(self, jogador):
-    #     bytes_data = bytes(self.representacao_tabuleiro(), 'utf-8')
-    #     jogador.sendall(bytes_data)
-    
-    # def checar_espaco(linha, coluna):
-    #     return linha + coluna 
-    
-    # def sobreposicao_embarcacao(self, linha, coluna):
-    #     try:
-    #         if not self.checar_espaco(linha, coluna):
-    #             return True  # Embarcação não cabe no tabuleiro
-    # # Embarcação não cabe no tabuleiro
-    #         for i in range(10):
-    #             coord_x = chr(ord('A') + linha)
-    #             coord_y = coluna + i
-    # # Coordenadas fora dos limites
-    #             if coord_x not in self._parte_a._dict_alphanum or coord_y >= len(self._parte_a._matrix[0]):
-    #                 return True 
-    # # Navio sobrepondo navio
-    #             if self._parte_a.get_quadrante(coord_x, coord_y) != 'X':
-    #                 return True 
-    # # Índicie fora dos limites do tabuleiro
-    #     except IndexError:
-    #         return True
-    #     return False
-    
-    # Numero de peças no tabuleiro
     
