@@ -1,3 +1,4 @@
+from persistencia.autenticacao_db import AutenticacaoDB
 from controladores.jogador_controlador import JogadorControlador
 from datetime import datetime, timedelta
 import hashlib
@@ -5,9 +6,10 @@ import hashlib
 class AutenticacaoControlador:
 
     _instance = None
+    _db = None
 
     def __init__(self):
-        pass
+        self._db = AutenticacaoDB()
 
     @classmethod
     def get_instance(cls):
