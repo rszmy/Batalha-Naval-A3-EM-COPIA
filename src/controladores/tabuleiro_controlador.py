@@ -39,12 +39,12 @@ class TabuleiroControlador():
 
     @classmethod
            
-    def representacao_tabuleiro(cls):
-        representacao = " "
-        for linha in cls.get_instance()._tabuleiro._parte_a._matrix:
-           representacao +=' '.join(linha) 
-           representacao += '\n'
-        return representacao.strip("\n")
+    def representacao_tabuleiro(self):
+        representacao = ' '
+        for linha in self._tabuleiro._parte_a._matrix:
+           representacao += ' '.join(linha) + '\n'
+           
+        return representacao
        
     @classmethod
     def enviar_tabuleiro(cls, jogador):

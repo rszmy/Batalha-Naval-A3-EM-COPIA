@@ -40,5 +40,5 @@ def remover_jogador_por_nome(nome: str):
 
 # ========================== Tabuleiro
 @app.get("/tabuleiro")
-async def mostrar_tabuleiro():
-    return TabuleiroControlador.get_instance().representacao_tabuleiro()
+def mostrar_tabuleiro():
+    return TabuleiroControlador.representacao_tabuleiro()
