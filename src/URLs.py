@@ -1,13 +1,12 @@
 from typing import Union
 from fastapi import FastAPI
-from controladores.main_controlador import MainControlador
 from controladores.jogador_controlador import JogadorControlador
 
 app = FastAPI()
 
 @app.get("/")
 async def menu():
-    pass
+    return {"message": "Hello World"}
 
 # ========================== Jogador
 
