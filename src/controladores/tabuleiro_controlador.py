@@ -1,17 +1,32 @@
-from modelos.tabuleiro import TabuleiroParte, Tabuleiro
+from modelos.tabuleiro import Tabuleiro
 from controladores.embarcacao_controlador import EmbarcacoesControlador
 
 class TabuleiroControlador():
+
     _instance = None 
     _tabuleiro = Tabuleiro()
-    
     
     @classmethod
     def get_instance(cls):
         if cls._instance is None:
             cls._instance = TabuleiroControlador()
         return cls._instance
-
+    
+    #Criando embarcacoes pro tabuleiro
+    @classmethod
+    def definir_embarcacoes(cls):
+        
+        cls.get_instance()._tabuleiro._parte_a._lista_embarcacoes = EmbarcacoesControlador.criar_embarcacoes()
+        cls.get_instance()._tabuleiro._parte_b._lista_embarcacoes = EmbarcacoesControlador.criar_embarcacoes()
+        
+        return
+    
+    #Colocando embarcacoes no tabuleiro
+    @classmethod
+    def colocar_embarcacoes(cls):
+        
+        return
+        
     @classmethod
     def checar_espaco(cls, linha, coluna):
         return linha + coluna

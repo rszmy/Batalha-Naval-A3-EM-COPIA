@@ -1,4 +1,4 @@
-from modelos.embarcacao import FabricaEmbarcacao, Embarcacao
+from modelos.embarcacao import FabricaEmbarcacao
 
 class EmbarcacoesControlador():
 
@@ -13,3 +13,6 @@ class EmbarcacoesControlador():
             FabricaEmbarcacao.instance().create('Navio Grande'),
             FabricaEmbarcacao.instance().create('Porta Aviões')
         ]
+        
+        return embarcacoes
+    

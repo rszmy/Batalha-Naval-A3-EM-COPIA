@@ -1,7 +1,9 @@
-from modelos.embarcacao import Embarcacao, FabricaEmbarcacao
+from modelos.embarcacao import Embarcacao
 
 class TabuleiroParte():
 
+    _lista_embarcacoes : list[Embarcacao]
+    
     _dict_alphanum = {
         "A" : 0,
         "B" : 1,
