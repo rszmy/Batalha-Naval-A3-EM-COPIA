@@ -38,12 +38,10 @@ class TabuleiroControlador():
         return False
 
     @classmethod
-           
     def representacao_tabuleiro(self):
-        representacao = ' '
+        representacao = []
         for linha in self._tabuleiro._parte_a._matrix:
-           representacao += ' '.join(linha) + '\n'
-           
+           representacao.append(''.join(linha)) 
         return representacao
        
     @classmethod
