@@ -2,7 +2,8 @@ import sqlite3
 
 class ConfigDB():
 
-    def executa_sql(codigo_sql, valores):
+    @classmethod
+    def executa_sql(cls, codigo_sql, valores):
         with sqlite3.connect("../batalha_naval.sqlite") as conn:
             if (valores != False):
                 try:
