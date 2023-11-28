@@ -15,11 +15,8 @@ class TabuleiroControlador():
     #Criando embarcacoes pro tabuleiro
     @classmethod
     def definir_embarcacoes(cls):
-        
-        cls.get_instance()._tabuleiro._parte_a._lista_embarcacoes = EmbarcacoesControlador.criar_embarcacoes()
-        cls.get_instance()._tabuleiro._parte_b._lista_embarcacoes = EmbarcacoesControlador.criar_embarcacoes()
-        
-        return
+        lista : list = EmbarcacoesControlador.criar_embarcacoes()
+        cls.get_instance()._tabuleiro.definir_embarcacoes_tabuleiro(lista)
     
     #Colocando embarcacoes no tabuleiro
     @classmethod

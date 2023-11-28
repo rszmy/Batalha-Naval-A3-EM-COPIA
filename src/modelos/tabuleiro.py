@@ -40,6 +40,9 @@ class TabuleiroParte():
         coord_x = self._dict_alphanum[x]
         return self._matrix[coord_x][y-1]
     
+    def definir_embarcacoes_parte_tabuleiro (self, lista : list[Embarcacao]):
+        self._lista_embarcacoes = lista
+    
 class Tabuleiro():
     
     _parte_a : TabuleiroParte = None
@@ -49,4 +52,6 @@ class Tabuleiro():
         self._parte_a = TabuleiroParte()
         self._parte_b = TabuleiroParte()
 
-    
+    def definir_embarcacoes_tabuleiro (self, lista : list[Embarcacao]):
+        self._parte_a.definir_embarcacoes_parte_tabuleiro(lista)
+        self._parte_b.definir_embarcacoes_parte_tabuleiro(lista)
