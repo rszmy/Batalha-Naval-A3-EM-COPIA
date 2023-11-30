@@ -12,7 +12,7 @@ class AutenticacaoControlador:
     @classmethod
     def autenticar(cls, nome: str, senha: str):
 
-        lista_de_jogadores = JogadorControlador.pegar_lista_de_jogadores
+        lista_de_jogadores = JogadorControlador.pegar_lista_de_jogadores()
 
         hash_db = AutenticacaoDB.get_instance().pegar_hash_por_nome(nome, lista_de_jogadores)
 
@@ -25,4 +25,4 @@ class AutenticacaoControlador:
     
     @classmethod
     def checar_chave(chave: str):
-        return AutenticacaoDB.get_instance().checar_chave
+        return AutenticacaoDB.get_instance().checar_chave()

@@ -36,6 +36,14 @@ def remover_jogador_por_nome(nome: str):
     return JogadorControlador.remover_jogador_por_nome(nome)
 
 # ========================== Auth
-@app.post("/auth/{nome}/{senha}")
+@app.post("/autenticacao/{nome}/{senha}")
 def autenticar(nome: str, senha: str):
     return AutenticacaoControlador.autenticar(nome, senha)
+
+# @app.middleware("http")
+# def auth_middleware(request, next):
+#     token = AuthController.auth(usuario: str, hash: str)
+#     if():
+#         return next(request)
+#     else:
+#         return 404
