@@ -21,7 +21,8 @@ class TabuleiroControlador():
     #Colocando embarcacoes no tabuleiro
     @classmethod
     def colocar_embarcacoes(cls):
-        return
+        
+            return
         
     @classmethod
     def checar_espaco(cls, linha, coluna):

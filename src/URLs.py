@@ -42,3 +42,8 @@ def remover_jogador_por_nome(nome: str):
 @app.get("/tabuleiro")
 def mostrar_tabuleiro():
     return TabuleiroControlador.representacao_tabuleiro()
+
+# ========================== Embarcações
+@app.get("/embarcacao/teste")
+def mostrar_embarcacao():
+    return EmbarcacoesControlador.criar_embarcacoes()
