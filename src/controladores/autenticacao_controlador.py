@@ -1,46 +1,28 @@
 from persistencia.autenticacao_db import AutenticacaoDB
 from controladores.jogador_controlador import JogadorControlador
-from datetime import datetime, timedelta
+from enum import Enum
 import hashlib
 
+class AutenticacaoErros(Enum):
+    USUARIO_OU_SENHA_INCORRETOS = 1
+    AUTENTICACAO_OK = 2
+
 class AutenticacaoControlador:
-
-    _instance = None
-    _db = None
-
-    def __init__(self):
-        self._db = AutenticacaoDB()
-
+    
     @classmethod
-    def get_instance(cls):
-        if cls._instance is None:
-            cls._instance = AutenticacaoControlador()
-        return cls._instance
+    def autenticar(cls, nome: str, senha: str):
 
-    # def get_hash(self, nome:str):
-    #     for u in JogadorControlador.get_instance()._db.listar_todos_os_jogadores():
-    #         if u._nome == nome:
-    #             return u._senha
-    #     return "-1"
+        lista_de_jogadores = JogadorControlador.pegar_lista_de_jogadores
 
-    # def destruir_sessao(cls, usuario: str):
-    #     cls.instance()._sessions = [x for x in cls.instance()._sessions if x._nome != usuario]
+        hash_db = AutenticacaoDB.get_instance().pegar_hash_por_nome(nome, lista_de_jogadores)
 
-    # def registrar_sessao(self, usuario: str):
-
-    #     AuthDB.destroy_session(usuario)
-
-    #     expiracao = datetime.now()
-    #     expiracao = expiracao + timedelta(minutes=30)
-
-    #     chave = hashlib.md5((usuario + str(expiracao.timestamp())).encode('utf-8'))
-    #     session : AuthDBSession = AuthDBSession(usuario, chave.hexdigest(), expiracao)
-    #     cls.instance()._sessions.append(session)
-
-    #     return session._chave
-
-    # def checar_chave(cls, chave: str):
-    #     for session in cls.instance()._sessions:
-    #         if(session._chave == chave and session._expiracao > datetime.now()):
-    #             return True
-    #     return False
+        senha = hashlib.md5(senha.encode('utf-8'))
+        senha = senha.hexdigest()
+        
+        if (senha == hash_db):
+            return AutenticacaoDB.get_instance().registrar_sessao(nome)
+        return AutenticacaoErros.USUARIO_OU_SENHA_INCORRETOS
+    
+    @classmethod
+    def checar_chave(chave: str):
+        return AutenticacaoDB.get_instance().checar_chave

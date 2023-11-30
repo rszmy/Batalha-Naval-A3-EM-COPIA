@@ -1,6 +1,7 @@
 from typing import Union
 from fastapi import FastAPI
 from controladores.jogador_controlador import JogadorControlador
+from controladores.autenticacao_controlador import AutenticacaoControlador
 
 app = FastAPI()
 
@@ -35,3 +36,6 @@ def remover_jogador_por_nome(nome: str):
     return JogadorControlador.remover_jogador_por_nome(nome)
 
 # ========================== Auth
+@app.post("/auth/{nome}/{senha}")
+def autenticar(nome: str, senha: str):
+    return AutenticacaoControlador.autenticar(nome, senha)
