@@ -1,32 +1,22 @@
 from typing import Union
 from fastapi import FastAPI
 from controladores.jogador_controlador import JogadorControlador
-from controladores.topicos_crontrolador import TopicoControlador
+from controladores.fila_controlador import FilaControlador
 
 app = FastAPI()
 
 # ========================== Topico
-@app.get("/topicos/get")
-def get_all_topics():
-    return TopicoControlador.listar_topicos()
 
-@app.get("/topicos/put/{nome}")
-def put_new_topic(nome: str):
-    return TopicoControlador.criar_novo_topico(nome)
+@app.post("/fila/entrar/{nome_jogador}")
+def entrar_na_fila(nome_jogador: str):
+    return FilaControlador.inscrever_na_fila(nome_jogador)
 
-@app.get("/topicos/delete/{nome}")
-def remove_topic(nome: str):
-    return TopicoControlador.remover_topico(nome)
-
-@app.post("/topicos/subscribe/{nome_topico}/{nome_jogador}")
-def subscribe(nome_topico: str, nome_jogador: str):
-    return TopicoControlador.subscribe(nome_topico, nome_jogador)
-
-@app.post("/topicos/unsubscribe/{nome_topico}/{nome_jogador}")
-def unsubscribe(nome_topico: str, nome_jogador: str):
-    return TopicoControlador.unsubscribe(nome_topico, nome_jogador)
+@app.post("/fila/sair/{nome_jogador}")
+def sair_da_fila(nome_jogador: str):
+    return FilaControlador.desinscrever_da_fila(nome_jogador)
 
 # ==========================
+
 @app.get("/")
 async def menu():
     return {"message": "Hello World"}
