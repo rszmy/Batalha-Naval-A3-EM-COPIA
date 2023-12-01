@@ -27,23 +27,17 @@ class FabricaEmbarcacao():
         elif(nome == 'Navio Pequeno'):
             return Embarcacao(nome, [
                 [2, 2]
-                [2, 2]
             ])
         elif(nome == 'Navio Medio'):
             return Embarcacao(nome, [
-                [3, 3, 3]
-                [3, 3, 3]
+                [3, 3, 3] 
             ])
         elif(nome == 'Navio Grande'):
             return Embarcacao(nome, [
                 [4, 4, 4, 4]
-                [4, 4, 4, 4]
             ])
         elif(nome == 'Porta Aviões'):
             return Embarcacao(nome, [
-                [5, 5, 5],
-                [0, 5, 0],
-                [0, 5, 0]
                 [5, 5, 5],
                 [0, 5, 0],
                 [0, 5, 0]
