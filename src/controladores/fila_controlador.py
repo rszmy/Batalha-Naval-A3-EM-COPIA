@@ -14,7 +14,6 @@ class FilaControlador:
         jogador = None
         
         for j in lista_de_jogadores:
-            print (j)
             if j['nome'] == nome_jogador:
                 jogador = j
 
