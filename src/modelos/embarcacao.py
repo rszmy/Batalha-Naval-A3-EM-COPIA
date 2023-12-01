@@ -2,7 +2,7 @@
 class Embarcacao():
     
     _nome : str
-    _formato : []
+    _formato : list
     
     def __init__(self, nome, formato):
         self._nome = nome
@@ -20,27 +20,28 @@ class FabricaEmbarcacao():
         return cls._instance
     
     def fabrica(cls, nome:str):
-        if(nome == 'Submarino'):
-            return Embarcacao(nome, [
-                [1]
-            ])
-        elif(nome == 'Navio Pequeno'):
-            return Embarcacao(nome, [
-                [2, 2]
-            ])
-        elif(nome == 'Navio Medio'):
-            return Embarcacao(nome, [
-                [3, 3, 3] 
-            ])
-        elif(nome == 'Navio Grande'):
-            return Embarcacao(nome, [
-                [4, 4, 4, 4]
-            ])
-        elif(nome == 'Porta Aviões'):
-            return Embarcacao(nome, [
-                [5, 5, 5],
-                [0, 5, 0],
-                [0, 5, 0]
-            ])
-        else:
-            return None
+        match nome:
+            case "Submarino":
+                return Embarcacao(nome, [
+                    [1]
+                ])
+            case "Navio Pequeno":
+                return Embarcacao(nome, [
+                    [2, 2]
+                ])
+            case "Navio Médio":
+                return Embarcacao(nome, [
+                    [3, 3, 3] 
+                ])
+            case "Navio Grande":
+                return Embarcacao(nome, [
+                    [4, 4, 4, 4]
+                ])
+            case "Porta Aviões":
+                return Embarcacao(nome, [
+                    [5, 5, 5],
+                    [0, 5, 0],
+                    [0, 5, 0]
+                ])
+            case _:
+                return None
