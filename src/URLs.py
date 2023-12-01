@@ -1,8 +1,8 @@
 from typing import Union
 from fastapi import FastAPI
 from controladores.jogador_controlador import JogadorControlador
-from controladores.embarcacao_controlador import EmbarcacoesControlador
 from controladores.tabuleiro_controlador import TabuleiroControlador
+from modelos.tabuleiro import Tabuleiro #Para teste
 
 app = FastAPI()
 
@@ -39,15 +39,24 @@ def remover_jogador_por_nome(nome: str):
 # ========================== Auth
 
 # ========================== Tabuleiro
+
+#Para teste
 @app.get("/tabuleiro")
 async def mostrar_tabuleiro():
-    return TabuleiroControlador.representacao_tabuleiro()
+    tabuleiro : Tabuleiro = Tabuleiro()
+    return TabuleiroControlador.representacao_tabuleiro(tabuleiro)
 
 #========================== Embarcação
+
+#Para teste   
 @app.get('/embarcacao/{embarcacao}/{coord_x}/{coord_y}/{orientacao}')
 async def colocar_embarcacao(embarcacao : str, coord_x : int, coord_y : int, orientacao : str):
-    return TabuleiroControlador.tabuleiro_embarcacoes(embarcacao, coord_x, coord_y, orientacao)
-    
+    tabuleiro : Tabuleiro = Tabuleiro()
+    return TabuleiroControlador.colocar_embarcacoes_no_tabuleiro(tabuleiro, embarcacao, coord_x, coord_y, orientacao)
+
+#Para teste   
 @app.get('/embarcacao/teste')
 async def teste_embarcacao():
-    return TabuleiroControlador.teste_embarcacao()
+    tabuleiro : Tabuleiro = Tabuleiro()
+    TabuleiroControlador.definir_embarcacoes(tabuleiro)
+    return TabuleiroControlador.pegar_embarcacoes(tabuleiro)
