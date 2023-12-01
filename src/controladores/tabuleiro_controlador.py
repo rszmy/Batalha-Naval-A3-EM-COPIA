@@ -26,19 +26,19 @@ class TabuleiroControlador():
     #Colocando embarcacoes no tabuleiro
     # @classmethod
     # def tabuleiro_embarcacoes(cls, embarcacao, coord_x, coord_y, orientacao):
-        
+    #     cls.get_instance().definir_embarcacoes()
     #     if not(0 <= coord_x < 10 and 0 <= coord_y < 10):
     #         raise ValueError('Coordenadas invalidas')
         
-    #     for i in range(cls._tabuleiro._parte_a._lista_embarcacoes[]):
+    #     for i in range(cls._tabuleiro._parte_a._lista_embarcacoes[embarcacao]):
     #         if orientacao == 'horizontal':
     #             if coord_y + i >= 10 or cls._tabuleiro._parte_a[coord_x][coord_y + i] != 'X':
     #                 raise ValueError('Outra embarcação aqui irmão')
-    #             cls._tabuleiro._parte_a[coord_x][coord_y + i] = 
+    #             cls._tabuleiro._parte_a[coord_x][coord_y + i] = embarcacao
     #         elif orientacao == 'vertical':
     #             if coord_x + i >= 10 or cls._tabuleiro._parte_a[coord_x + i][coord_y] != 'X':
     #                 raise ValueError('Outra embarcação aqui irmão')
-    #             cls._tabuleiro._parte_a[coord_x + i][coord_y] = 
+    #             cls._tabuleiro._parte_a[coord_x + i][coord_y] = embarcacao
     #         else:
     #             raise ValueError('Orientação errada')
         
