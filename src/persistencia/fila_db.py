@@ -6,7 +6,7 @@ class FilaDB():
     _fila: Fila
     
     def __init__(self: "FilaDB"):
-        self._fila = []
+        self._fila = Fila()
     
     @classmethod
     def instance(cls):
@@ -16,8 +16,12 @@ class FilaDB():
     
     @classmethod
     def inscrever_jogador_na_fila(cls, jogador):
-        cls.instance()._fila.inscrever_jogador
+        cls.instance()._fila.inscrever_jogador(jogador)
 
     @classmethod
     def desinscrever_jogador_na_fila(cls, jogador):
-        cls.instance()._fila.desinscrever_jogador
+        cls.instance()._fila.desinscrever_jogador(jogador)
+
+    @classmethod
+    def mostrar_jogadores_na_fila(cls):
+        return cls.instance()._fila.mostrar_jogadores_inscritos()

@@ -15,6 +15,10 @@ def entrar_na_fila(nome_jogador: str):
 def sair_da_fila(nome_jogador: str):
     return FilaControlador.desinscrever_da_fila(nome_jogador)
 
+@app.get("/fila/jogadores_na_fila")
+def mostrar_jogadores_na_fila():
+    return FilaControlador.mostrar_jogadores_na_fila()
+
 # ==========================
 
 @app.get("/")
