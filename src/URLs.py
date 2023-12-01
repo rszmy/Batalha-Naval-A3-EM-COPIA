@@ -40,5 +40,14 @@ def remover_jogador_por_nome(nome: str):
 
 # ========================== Tabuleiro
 @app.get("/tabuleiro")
-def mostrar_tabuleiro():
+async def mostrar_tabuleiro():
     return TabuleiroControlador.representacao_tabuleiro()
+
+#========================== Embarcação
+@app.get('/embarcacao/{embarcacao}/{coord_x}/{coord_y}/{orientacao}')
+async def colocar_embarcacao(embarcacao : str, coord_x : int, coord_y : int, orientacao : str):
+    return TabuleiroControlador.tabuleiro_embarcacoes(embarcacao, coord_x, coord_y, orientacao)
+    
+@app.get('/embarcacao/teste')
+async def teste_embarcacao():
+    return TabuleiroControlador.teste_embarcacao()

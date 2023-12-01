@@ -18,10 +18,30 @@ class TabuleiroControlador():
         lista : list = EmbarcacoesControlador.criar_embarcacoes()
         cls.get_instance()._tabuleiro.definir_embarcacoes_tabuleiro(lista)
     
-    #Colocando embarcacoes no tabuleiro
     @classmethod
-    def colocar_embarcacoes(cls):
-        return
+    def teste_embarcacao(cls):
+        cls.get_instance().definir_embarcacoes()
+        return cls.get_instance()._tabuleiro._parte_a._lista_embarcacoes
+    
+    #Colocando embarcacoes no tabuleiro
+    # @classmethod
+    # def tabuleiro_embarcacoes(cls, embarcacao, coord_x, coord_y, orientacao):
+        
+    #     if not(0 <= coord_x < 10 and 0 <= coord_y < 10):
+    #         raise ValueError('Coordenadas invalidas')
+        
+    #     for i in range(cls._tabuleiro._parte_a._lista_embarcacoes[]):
+    #         if orientacao == 'horizontal':
+    #             if coord_y + i >= 10 or cls._tabuleiro._parte_a[coord_x][coord_y + i] != 'X':
+    #                 raise ValueError('Outra embarcação aqui irmão')
+    #             cls._tabuleiro._parte_a[coord_x][coord_y + i] = 
+    #         elif orientacao == 'vertical':
+    #             if coord_x + i >= 10 or cls._tabuleiro._parte_a[coord_x + i][coord_y] != 'X':
+    #                 raise ValueError('Outra embarcação aqui irmão')
+    #             cls._tabuleiro._parte_a[coord_x + i][coord_y] = 
+    #         else:
+    #             raise ValueError('Orientação errada')
+        
         
     @classmethod
     def checar_espaco(cls, linha, coluna):
