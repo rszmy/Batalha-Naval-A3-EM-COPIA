@@ -10,11 +10,11 @@ class Fila():
         contagem = len(self._jogadores)
         return f"Quantidade de jogadores na fila: {contagem}"
     
-    def inscrever_jogador(self, jogador: Jogador):
+    def inscrever_jogador(self, jogador):
         self._jogadores.append(jogador)
     
-    def desinscrever_jogador(self, jogador: Jogador):
-        self._jogadores = [j for j in self._jogadores if j._nome != jogador._nome]
+    def desinscrever_jogador(self, jogador):
+        self._jogadores = [j for j in self._jogadores if j['nome'] != jogador['nome']]
 
     def mostrar_jogadores_inscritos(self):
         return self._jogadores
