@@ -67,7 +67,7 @@ class Tabuleiro():
         else:
             return False
         
-    def definir_embarcacao_viva_na_parte(self, embarcacao: Embarcacao, parte  str):
+    def definir_embarcacao_viva_na_parte(self, embarcacao: Embarcacao, parte: str):
         if (parte == "a"):
             return self._parte_a.definir_embarcacao_viva(embarcacao)
         elif (parte == "b"):
