@@ -49,10 +49,10 @@ async def mostrar_tabuleiro():
 #========================== Embarcação
 
 #Para teste   
-@app.get('/embarcacao/{embarcacao}/{coord_x}/{coord_y}/{orientacao}')
-async def colocar_embarcacao(tabuleiro : Tabuleiro, embarcacao : str, coord_x : int, coord_y : int, orientacao : str):
+@app.get('/embarcacao/{embarcacao}/{coord_x}/{coord_y}/{orientacao}/{parte}')
+async def colocar_embarcacao(embarcacao : str, coord_x : int, coord_y : int, orientacao : str, parte : str):
     tabuleiro : Tabuleiro = Tabuleiro()
-    return TabuleiroControlador.colocar_embarcacoes_no_tabuleiro(tabuleiro, embarcacao, coord_x, coord_y, orientacao)
+    return TabuleiroControlador.colocar_embarcacoes_no_tabuleiro(tabuleiro, embarcacao, coord_x, coord_y, orientacao, parte)
 
 #Para teste   
 @app.get('/embarcacao/teste')
@@ -60,3 +60,4 @@ async def teste_embarcacao():
     tabuleiro : Tabuleiro = Tabuleiro()
     TabuleiroControlador.definir_embarcacoes_para_colocar(tabuleiro)
     return TabuleiroControlador.listar_embarcacoes_para_colocar(tabuleiro, "a")
+

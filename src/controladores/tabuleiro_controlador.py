@@ -27,23 +27,23 @@ class TabuleiroControlador():
             tabuleiro.definir_embarcacao_viva_na_parte(embarcacao)
             return embarcacao
         
-    # Colocando embarcacoes no tabuleiro
-    @classmethod
-    def colocar_embarcacoes_no_tabuleiro(cls, tabuleiro: Tabuleiro, parte: str, embarcacao: str, coord_x: int, coord_y: int, orientacao: str):
-
-        if not(0 <= coord_x < 10 and 0 <= coord_y < 10):
-            raise ValueError('Coordenadas invalidas')
-        for i in range(tabuleiro.definir_embarcacao_viva_na_parte[embarcacao]):
-            if orientacao == 'horizontal':
-                if coord_y + i >= 10 or tabuleiro.devolver_tabuleiro_por_parte(parte)[coord_x][coord_y + i] != 'X':
-                    raise ValueError('Outra embarcação aqui irmão')
-                tabuleiro.devolver_tabuleiro_por_parte(parte)[coord_x][coord_y + i] = embarcacao
-            elif orientacao == 'vertical':
-                if coord_x + i >= 10 or tabuleiro.devolver_tabuleiro_por_parte(parte)[coord_x + i][coord_y] != 'X':
-                    raise ValueError('Outra embarcação aqui irmão')
-                tabuleiro.devolver_tabuleiro_por_parte(parte)[coord_x + i][coord_y] = embarcacao
-            else:
-                raise ValueError('Orientação errada')
+    # Colocando embarcacoes no tabuleiro             
+    # @classmethod
+    # def colocar_embarcacoes_no_tabuleiro(cls, tabuleiro: Tabuleiro, parte: str, embarcacao: str, coord_x: int, coord_y: int, orientacao: str):
+        
+    #     if not(0 <= coord_x < 10 and 0 <= coord_y < 10):
+    #         raise ValueError('Coordenadas invalidas')
+    #     for i in range(tabuleiro.definir_embarcacao_viva_na_parte[embarcacao]):
+    #         if orientacao == 'horizontal':
+    #             if coord_y + i >= 10 or tabuleiro.devolver_tabuleiro_por_parte(parte)[coord_x][coord_y + i] != 'X':
+    #                 raise ValueError('Outra embarcação aqui irmão')
+    #             tabuleiro.devolver_tabuleiro_por_parte(parte)[coord_x][coord_y + i] = embarcacao
+    #         elif orientacao == 'vertical':
+    #             if coord_x + i >= 10 or tabuleiro.devolver_tabuleiro_por_parte(parte)[coord_x + i][coord_y] != 'X':
+    #                 raise ValueError('Outra embarcação aqui irmão')
+    #             tabuleiro.devolver_tabuleiro_por_parte(parte)[coord_x + i][coord_y] = embarcacao
+    #         else:
+    #             raise ValueError('Orientação errada')
         
         
     # @classmethod

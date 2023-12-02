@@ -36,7 +36,9 @@ class TabuleiroParte():
     
     def definir_embarcacao_viva(self, embarcacao : Embarcacao):
         self._lista_embarcacoes_colocadas.append(embarcacao)
-        
+    
+    def devolver_embarcacoes_vivas(self):
+        return self._lista_embarcacoes_colocadas()
         
 class Tabuleiro():
     
@@ -69,8 +71,8 @@ class Tabuleiro():
         
     def definir_embarcacao_viva_na_parte(self, embarcacao: Embarcacao, parte: str):
         if (parte == "a"):
-            return self._parte_a.definir_embarcacao_viva(embarcacao)
+            return self._parte_a.devolver_embarcacoes_vivas(embarcacao)
         elif (parte == "b"):
-            return self._parte_b.definir_embarcacao_viva(embarcacao)
+            return self._parte_b.devolver_embarcacoes_vivas(embarcacao)
         else:
             return False
