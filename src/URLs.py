@@ -58,5 +58,5 @@ async def colocar_embarcacao(tabuleiro : Tabuleiro, embarcacao : str, coord_x : 
 @app.get('/embarcacao/teste')
 async def teste_embarcacao():
     tabuleiro : Tabuleiro = Tabuleiro()
-    TabuleiroControlador.definir_embarcacoes(tabuleiro)
-    return TabuleiroControlador.pegar_embarcacoes(tabuleiro)
+    TabuleiroControlador.definir_embarcacoes_para_colocar(tabuleiro)
+    return TabuleiroControlador.listar_embarcacoes_para_colocar(tabuleiro, "a")
