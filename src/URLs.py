@@ -1,8 +1,25 @@
 from typing import Union
 from fastapi import FastAPI
 from controladores.jogador_controlador import JogadorControlador
+from controladores.fila_controlador import FilaControlador
 
 app = FastAPI()
+
+# ========================== Topico
+
+@app.post("/fila/entrar/{nome_jogador}")
+def entrar_na_fila(nome_jogador: str):
+    return FilaControlador.inscrever_na_fila(nome_jogador)
+
+@app.post("/fila/sair/{nome_jogador}")
+def sair_da_fila(nome_jogador: str):
+    return FilaControlador.desinscrever_da_fila(nome_jogador)
+
+@app.get("/fila/jogadores_na_fila")
+def mostrar_jogadores_na_fila():
+    return FilaControlador.mostrar_jogadores_na_fila()
+
+# ==========================
 
 @app.get("/")
 async def menu():
