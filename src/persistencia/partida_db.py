@@ -16,6 +16,15 @@ class PartidaDB():
         return cls.get_instance()._lista_de_partidas
     
     @classmethod
+    def checar_jogador_em_partida(cls, nome_jogador: str):
+        lista_de_partidas = cls.get_instance().listar_partidas()
+
+        for partida in lista_de_partidas:
+            if partida._jogador_a["nome"] == nome_jogador:
+                return {"message": f"Partida iniciada no id: {partida._id}"}
+        return {"message": "Você não está em fila e nem em uma partida"}
+    
+    @classmethod
     def começar_nova_partida(cls, jogador_a: object, jogador_b: object):
         partida : Partida = Partida(jogador_a, jogador_b)
         cls.get_instance()._lista_de_partidas.append(partida)

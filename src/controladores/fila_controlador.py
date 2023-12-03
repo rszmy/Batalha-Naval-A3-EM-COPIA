@@ -65,5 +65,10 @@ class FilaControlador:
     
     # Precisa da partida - Método para checar se seu nome está na fila e se sua partida começou
     @classmethod
-    def checar_confirmacao_da_partida(nome: str):
-        pass
+    def checar_confirmacao_da_partida(cls, nome_jogador: str):
+        fila = FilaDB.instance().mostrar_jogadores_na_fila()
+
+        for jogador in fila:
+            if jogador['nome'] == nome_jogador:
+                return {"message": "Aguardando jogadores para partida"}
+        return PartidaControlador.checar_jogador_em_partida(nome_jogador)

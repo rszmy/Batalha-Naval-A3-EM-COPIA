@@ -52,6 +52,10 @@ def sair_da_fila(nome_jogador: str):
 def mostrar_jogadores_na_fila():
     return FilaControlador.mostrar_jogadores_na_fila()
 
+@app.get("/fila/checagem/{nome_jogador}")
+def checar_começo_de_partida(nome_jogador: str):
+    return FilaControlador.checar_confirmacao_da_partida(nome_jogador)
+
 # ========================== Auth
 
 # ========================== Partida

@@ -7,6 +7,10 @@ class PartidaControlador:
     @classmethod
     def listar_partidas(cls):
         return PartidaDB().get_instance().listar_partidas
+    
+    @classmethod
+    def checar_jogador_em_partida(cls, nome_jogador: str):
+        return PartidaDB().get_instance().checar_jogador_em_partida(nome_jogador)
 
     @classmethod
     def começar_nova_partida(cls, jogador_a: object, jogador_b: object):

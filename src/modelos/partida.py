@@ -8,6 +8,7 @@ class Partida():
     _jogador_a : Jogador
     _jogador_b : Jogador
     _tabuleiro : Tabuleiro
+    _turno : int
 
     id_obj = itertools.count(1)
 
@@ -16,3 +17,4 @@ class Partida():
         self._jogador_a = jogador_a
         self._jogador_b = jogador_b
         self._tabuleiro = Tabuleiro()
+        self._turno = 1
