@@ -26,3 +26,44 @@ class PartidaControlador:
     @classmethod
     def pegar_tabuleiro_por_id(cls, id: int):
         return PartidaDB.get_instance().pegar_tabuleiro_por_id(id)
+    
+    @classmethod
+    def pegar_nome_jogador_por_id(cls, id: int, id_jogador: str):
+        return PartidaDB.get_instance().pegar_nome_jogador_por_id(id, id_jogador)
+    
+    @classmethod
+    def pegar_representacao_tabuleiro_partida(cls, id: int, nome_jogador: str):
+        tabuleiro = cls.pegar_tabuleiro_por_id(id)
+
+        rep_list = []
+
+        jogador_a = cls.pegar_nome_jogador_por_id(id, "a")
+        jogador_b = cls.pegar_nome_jogador_por_id(id, "b")
+
+        if (jogador_a == nome_jogador):
+            rep_tabuleiro = TabuleiroControlador.pegar_tabuleiro_por_parte(tabuleiro, "a")
+            rep_camuflado = TabuleiroControlador.pegar_tabuleiro_camuflado_por_parte(tabuleiro, "b")
+        elif (jogador_b == nome_jogador):
+            rep_tabuleiro = TabuleiroControlador.pegar_tabuleiro_por_parte(tabuleiro, "b")
+            rep_camuflado = TabuleiroControlador.pegar_tabuleiro_camuflado_por_parte(tabuleiro, "a")
+        else: 
+            return {"message": "Jogador não pertence ao jogo"}
+        
+        rep_list.append(rep_tabuleiro)
+        rep_list.append(rep_camuflado)
+
+        return rep_list
+    
+    @classmethod
+    def colocar_embarcacao_tabuleiro(cls, id: int, nome_jogador: str, embarcao: str, coord_x: str, coord_y: int, orientacao: str):
+        tabuleiro = cls.pegar_tabuleiro_por_id(id)
+
+        jogador_a = cls.pegar_nome_jogador_por_id(id, "a")
+        jogador_b = cls.pegar_nome_jogador_por_id(id, "b")
+
+        if (jogador_a == nome_jogador):
+            return TabuleiroControlador.colocar_embarcacoes_no_tabuleiro(tabuleiro, "a", embarcao, coord_x, coord_y, orientacao)
+        elif (jogador_b == nome_jogador):
+            return TabuleiroControlador.colocar_embarcacoes_no_tabuleiro(tabuleiro, "b", embarcao, coord_x, coord_y, orientacao)
+        else: 
+            return {"message": "Jogador não pertence ao jogo"}

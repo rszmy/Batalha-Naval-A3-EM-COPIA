@@ -20,7 +20,7 @@ class PartidaDB():
         lista_de_partidas = cls.get_instance().listar_partidas()
 
         for partida in lista_de_partidas:
-            if partida._jogador_a["nome"] == nome_jogador:
+            if partida._jogador_a["nome"] == nome_jogador or partida._jogador_b["nome"] == nome_jogador:
                 return {"message": f"Partida iniciada no id: {partida._id}"}
         return {"message": "Você não está em fila e nem em uma partida"}
     
@@ -39,6 +39,19 @@ class PartidaDB():
                 id = partida._id
         
         return id
+    
+    @classmethod
+    def pegar_nome_jogador_por_id(cls, id: int, id_jogador: str):
+        lista_de_partidas = cls.get_instance().listar_partidas()
+
+        for partida in lista_de_partidas:
+            if partida._id == id:
+                if id_jogador == "a":
+                    return partida._jogador_a["nome"]
+                elif id_jogador == "b": 
+                    return partida._jogador_b["nome"]
+                else:
+                    return False
     
     @classmethod
     def pegar_tabuleiro_por_id(cls, id: int):

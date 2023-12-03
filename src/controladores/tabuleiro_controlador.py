@@ -80,9 +80,9 @@ class TabuleiroControlador():
         if checar_posicionamento == True:
             cls.definir_embarcacao_viva_na_parte(tabuleiro, parte_tabuleiro, embarcacao)
             cls.remover_embarcacao_da_lista_colocar(tabuleiro, parte_tabuleiro, embarcacao)
-            return True
+            return {"message": "Peça colocada"}
         else:
-            return False
+            return {"message": "Falha em colocar peça"}
         
     # ========== Ações no tabuleiro
     

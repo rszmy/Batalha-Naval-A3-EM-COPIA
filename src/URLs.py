@@ -2,7 +2,7 @@ from typing import Union
 from fastapi import FastAPI
 from controladores.jogador_controlador import JogadorControlador
 from controladores.fila_controlador import FilaControlador
-from controladores.tabuleiro_controlador import TabuleiroControlador
+from controladores.partida_controlador import PartidaControlador
 
 app = FastAPI()
 
@@ -59,3 +59,11 @@ def checar_começo_de_partida(nome_jogador: str):
 # ========================== Auth
 
 # ========================== Partida
+
+@app.get("/partida/tabuleiro/{id}/{nome_jogador}")
+def pegar_representacao_tabuleiro_partida(id: int, nome_jogador: str):
+    return PartidaControlador.pegar_representacao_tabuleiro_partida(id, nome_jogador)
+
+@app.patch("/partida/tabuleiro/peças/{id}/{nome_jogador}/{embarcacao}/{coord_x}/{coord_y}/{orientacao}")
+def colocar_embarcacao_tabuleiro(id: int, nome_jogador: str, embarcacao: str, coord_x: str, coord_y: int, orientacao: str):
+    return PartidaControlador.colocar_embarcacao_tabuleiro(id, nome_jogador, embarcacao, coord_x, coord_y, orientacao)
