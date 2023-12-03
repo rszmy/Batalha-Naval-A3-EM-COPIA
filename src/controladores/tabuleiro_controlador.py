@@ -72,6 +72,9 @@ class TabuleiroControlador():
     def colocar_embarcacoes_no_tabuleiro(cls, tabuleiro: Tabuleiro, parte_tabuleiro: str, nome_embarcacao: str, coord_x: str, coord_y: int, orientacao: str):
 
         embarcacao = cls.pegar_embarcacao_para_colocar_por_nome(tabuleiro, parte_tabuleiro, nome_embarcacao)
+        if embarcacao == False:
+            return False
+
         checar_posicionamento = tabuleiro.colocar_embarcacao_na_parte(parte_tabuleiro, embarcacao, coord_x, coord_y, orientacao)
 
         if checar_posicionamento == True:

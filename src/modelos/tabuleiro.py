@@ -61,37 +61,22 @@ class TabuleiroParte():
         copia_de_segurança = copy.deepcopy(self._area_tabuleiro)
 
         if not(0 <= coord_xx < 10 and 0 <= coord_yy < 10):
-            raise ValueError("Coordenadas invalidas")
+            return False
         
-        if (len(embarcacao._formato) == 1):
-            for i in range(len(embarcacao._formato[0])):
+        for i in range(len(embarcacao._formato)):
+            for j in range(len(embarcacao._formato[i])):
                 if orientacao == "horizontal":
-                    if coord_yy + i >= 10 or self._area_tabuleiro[coord_xx][coord_yy + i] != 'X':
+                    if coord_yy + j >= 10 or self._area_tabuleiro[coord_xx + i][coord_yy + j] != 'X':
                         self._area_tabuleiro = copia_de_segurança
                         return False
-                    self._area_tabuleiro[coord_xx][coord_yy + i] = embarcacao._formato[0][i]
+                    self._area_tabuleiro[coord_xx + i][coord_yy + j] = embarcacao._formato[i][j]
                 elif orientacao == "vertical":
-                    if coord_xx + i >= 10 or self._area_tabuleiro[coord_xx + i][coord_yy] != 'X':
+                    if coord_xx + j >= 10 or self._area_tabuleiro[coord_xx + j][coord_yy + i] != 'X':
                         self._area_tabuleiro = copia_de_segurança
                         return False
-                    self._area_tabuleiro[coord_xx + i][coord_yy] = embarcacao._formato[0][i]
+                    self._area_tabuleiro[coord_xx + j][coord_yy + i] = embarcacao._formato[i][j]
                 else:
                     return False
-        else:
-            for i in range(len(embarcacao._formato)):
-                for j in range(len(embarcacao._formato[i])):
-                    if orientacao == "horizontal":
-                        if coord_yy + j >= 10 or self._area_tabuleiro[coord_xx + i][coord_yy + j] != 'X':
-                            self._area_tabuleiro = copia_de_segurança
-                            return False
-                        self._area_tabuleiro[coord_xx + i][coord_yy + j] = embarcacao._formato[i][j]
-                    elif orientacao == "vertical":
-                        if coord_xx + j >= 10 or self._area_tabuleiro[coord_xx + j][coord_yy + i] != 'X':
-                            self._area_tabuleiro = copia_de_segurança
-                            return False
-                        self._area_tabuleiro[coord_xx + j][coord_yy + i] = embarcacao._formato[i][j]
-                    else:
-                        return False
         
         return True
         
