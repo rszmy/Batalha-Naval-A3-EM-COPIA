@@ -49,7 +49,11 @@ TabuleiroControlador.definir_embarcacoes_para_colocar(tabuleiro)
 async def mostrar_tabuleiro(parte: str):
     return TabuleiroControlador.pegar_tabuleiro_por_parte(tabuleiro, parte)
 
-#========================== Embarcação
+#Para teste
+@app.get("/tabuleiro2/{parte}")
+async def mostrar_tabuleiro_camuflado(parte: str):
+    return TabuleiroControlador.pegar_tabuleiro_camuflado_por_parte(tabuleiro, parte)
+# ========================== Embarcação
 
 #Para teste   
 @app.get('/embarcacao/{embarcacao}/{coord_x}/{coord_y}/{orientacao}/{parte}')
@@ -61,3 +65,7 @@ async def colocar_embarcacao(embarcacao : str, coord_x : str, coord_y : int, ori
 async def teste_embarcacao():
     return TabuleiroControlador.listar_embarcacoes_para_colocar(tabuleiro, "a")
 
+#Para teste disparo
+@app.get('/disparo/{parte}/{coord_x}/{coord_y}')
+async def teste_disparo(parte: str, coord_x: str, coord_y: int):
+    return TabuleiroControlador.disparo(tabuleiro, parte, coord_x, coord_y)

@@ -83,3 +83,10 @@ class TabuleiroControlador():
             return True
         else:
             return False
+        
+    # ========== Ações no tabuleiro
+    
+    @classmethod
+    def disparo(cls, tabuleiro: Tabuleiro, parte_tabuleiro: str, coord_x: str, coord_y: int):
+        return tabuleiro.disparo(parte_tabuleiro, coord_x, coord_y)
+        

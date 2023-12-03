@@ -80,6 +80,27 @@ class TabuleiroParte():
         
         return True
         
+    # ========== Ações no tabuleiro
+    
+    def disparo(self, coord_x: str, coord_y: int):
+        
+        coord_xx = self._coord_x.index(coord_x)
+        coord_yy = coord_y - 1
+        pos = self._area_tabuleiro[coord_xx][coord_yy]
+         
+        if not(0 <= coord_xx < 10 and 0 <= coord_yy < 10):    
+            return False
+        
+        match pos:
+                case "X":
+                    return {"message": "Tiro na água!"}
+                case "N":
+                    self.revelar_embarcacao(coord_xx, coord_yy)
+                    return {"message": "Peça revalda!"}
+    
+    def revelar_embarcacao(self, coord_xx: int, coord_yy: str):
+        self._area_tabuleiro_camuflada[coord_xx][coord_yy] = self._area_tabuleiro[coord_xx][coord_yy]          
+    
 class Tabuleiro():
     
     _parte_a : TabuleiroParte = None
@@ -164,5 +185,14 @@ class Tabuleiro():
             return self._parte_a.colocar_embarcacao_na_area(embarcacao, coord_x, coord_y, orientacao)
         elif (parte == "b"):
             return self._parte_b.colocar_embarcacao_na_area(embarcacao, coord_x, coord_y, orientacao)
+        else:
+            return False
+        
+    # ========== Ações no tabuleiro
+    def disparo(self, parte: str, coord_x: str, coord_y: int):
+        if (parte == "a"):
+            return self._parte_a.disparo(coord_x, coord_y)
+        elif (parte == "b"):
+            return self._parte_b.disparo(coord_x, coord_y)
         else:
             return False
