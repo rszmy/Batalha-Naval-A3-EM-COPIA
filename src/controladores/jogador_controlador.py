@@ -13,8 +13,8 @@ class JogadorControlador:
 
             jogadores_dto.append({
                 "nome": jogador._nome,
-                "pontuacao": int(jogador._pontuacao_acumulada),
-                "email": jogador._email
+                "email": jogador._email,
+                "pontuacao": int(jogador._pontuacao_acumulada)
             })
 
         lista_filtrada : [] = jogadores_dto

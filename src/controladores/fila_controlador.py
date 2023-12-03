@@ -1,5 +1,6 @@
 from persistencia.fila_db import FilaDB
 from controladores.jogador_controlador import JogadorControlador
+from controladores.partida_controlador import PartidaControlador
 from enum import Enum 
 
 class FilaControladorErro(Enum):
@@ -22,7 +23,7 @@ class FilaControlador:
             jogadores_das_partidas = cls.checar_estado_da_fila()
             if (jogadores_das_partidas):
                 while (len(jogadores_das_partidas) / 2) > 0:
-                    # PartidaControlador.criar_partida(jogadores_das_partidas[0], jogadores_das_partidas[1])
+                    PartidaControlador.começar_nova_partida(jogadores_das_partidas[0], jogadores_das_partidas[1])
                     for _ in range(2): jogadores_das_partidas.pop(0)
             return True
         else:
