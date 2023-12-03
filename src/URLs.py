@@ -5,20 +5,6 @@ from controladores.fila_controlador import FilaControlador
 
 app = FastAPI()
 
-# ========================== Topico
-
-@app.post("/fila/entrar/{nome_jogador}")
-def entrar_na_fila(nome_jogador: str):
-    return FilaControlador.inscrever_na_fila(nome_jogador)
-
-@app.post("/fila/sair/{nome_jogador}")
-def sair_da_fila(nome_jogador: str):
-    return FilaControlador.desinscrever_da_fila(nome_jogador)
-
-@app.get("/fila/jogadores_na_fila")
-def mostrar_jogadores_na_fila():
-    return FilaControlador.mostrar_jogadores_na_fila()
-
 # ==========================
 
 @app.get("/")
@@ -50,5 +36,19 @@ def editar_jogador_por_nome(nome: str, email: str):
 @app.delete("/jogadores/remoção/{nome}")
 def remover_jogador_por_nome(nome: str):
     return JogadorControlador.remover_jogador_por_nome(nome)
+
+# ========================== Fila
+
+@app.post("/fila/entrar/{nome_jogador}")
+def entrar_na_fila(nome_jogador: str):
+    return FilaControlador.inscrever_na_fila(nome_jogador)
+
+@app.post("/fila/sair/{nome_jogador}")
+def sair_da_fila(nome_jogador: str):
+    return FilaControlador.desinscrever_da_fila(nome_jogador)
+
+@app.get("/fila/jogadores_na_fila")
+def mostrar_jogadores_na_fila():
+    return FilaControlador.mostrar_jogadores_na_fila()
 
 # ========================== Auth
