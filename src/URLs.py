@@ -2,6 +2,7 @@ from typing import Union
 from fastapi import FastAPI
 from controladores.jogador_controlador import JogadorControlador
 from controladores.fila_controlador import FilaControlador
+from controladores.tabuleiro_controlador import TabuleiroControlador
 
 app = FastAPI()
 
@@ -52,3 +53,5 @@ def mostrar_jogadores_na_fila():
     return FilaControlador.mostrar_jogadores_na_fila()
 
 # ========================== Auth
+
+# ========================== Partida
