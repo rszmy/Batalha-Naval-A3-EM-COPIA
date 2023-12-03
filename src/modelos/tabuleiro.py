@@ -99,7 +99,12 @@ class TabuleiroParte():
                     return {"message": "Peça revalda!"}
     
     def revelar_embarcacao(self, coord_xx: int, coord_yy: str):
-        self._area_tabuleiro_camuflada[coord_xx][coord_yy] = self._area_tabuleiro[coord_xx][coord_yy]          
+        self._area_tabuleiro_camuflada[coord_xx][coord_yy] = self._area_tabuleiro[coord_xx][coord_yy]
+
+    def comparar_tabuleiros(self):
+        if self._area_tabuleiro == self._area_tabuleiro_camuflada:
+            return True
+        return False              
     
 class Tabuleiro():
     
@@ -194,5 +199,13 @@ class Tabuleiro():
             return self._parte_a.disparo(coord_x, coord_y)
         elif (parte == "b"):
             return self._parte_b.disparo(coord_x, coord_y)
+        else:
+            return False
+        
+    def comparar_tabuleiros_por_parte(self, parte: str):
+        if (parte == "a"):
+            return self._parte_a.comparar_tabuleiros()
+        elif (parte == "b"):
+            return self._parte_b.comparar_tabuleiros()
         else:
             return False

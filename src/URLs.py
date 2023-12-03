@@ -2,7 +2,6 @@ from typing import Union
 from fastapi import FastAPI
 from controladores.jogador_controlador import JogadorControlador
 from controladores.tabuleiro_controlador import TabuleiroControlador
-from modelos.tabuleiro import Tabuleiro #Para teste
 
 app = FastAPI()
 
@@ -38,34 +37,4 @@ def remover_jogador_por_nome(nome: str):
 
 # ========================== Auth
 
-# ========================== Tabuleiro
-
-#Para teste
-tabuleiro : Tabuleiro = Tabuleiro()
-TabuleiroControlador.definir_embarcacoes_para_colocar(tabuleiro)
-
-#Para teste
-@app.get("/tabuleiro/{parte}")
-async def mostrar_tabuleiro(parte: str):
-    return TabuleiroControlador.pegar_tabuleiro_por_parte(tabuleiro, parte)
-
-#Para teste
-@app.get("/tabuleiro2/{parte}")
-async def mostrar_tabuleiro_camuflado(parte: str):
-    return TabuleiroControlador.pegar_tabuleiro_camuflado_por_parte(tabuleiro, parte)
-# ========================== Embarcação
-
-#Para teste   
-@app.get('/embarcacao/{embarcacao}/{coord_x}/{coord_y}/{orientacao}/{parte}')
-async def colocar_embarcacao(embarcacao : str, coord_x : str, coord_y : int, orientacao : str, parte : str):
-    return TabuleiroControlador.colocar_embarcacoes_no_tabuleiro(tabuleiro, parte, embarcacao, coord_x, coord_y, orientacao)
-
-#Para teste   
-@app.get('/embarcacao/teste')
-async def teste_embarcacao():
-    return TabuleiroControlador.listar_embarcacoes_para_colocar(tabuleiro, "a")
-
-#Para teste disparo
-@app.get('/disparo/{parte}/{coord_x}/{coord_y}')
-async def teste_disparo(parte: str, coord_x: str, coord_y: int):
-    return TabuleiroControlador.disparo(tabuleiro, parte, coord_x, coord_y)
+# ========================== Partida

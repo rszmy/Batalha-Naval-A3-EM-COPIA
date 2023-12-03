@@ -89,4 +89,8 @@ class TabuleiroControlador():
     @classmethod
     def disparo(cls, tabuleiro: Tabuleiro, parte_tabuleiro: str, coord_x: str, coord_y: int):
         return tabuleiro.disparo(parte_tabuleiro, coord_x, coord_y)
+    
+    @classmethod
+    def comparar_tabuleiros_por_parte(cls, tabuleiro: Tabuleiro, parte_tabuleiro: str):
+        return tabuleiro.comparar_tabuleiros_por_parte(parte_tabuleiro)
         
