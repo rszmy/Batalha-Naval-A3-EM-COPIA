@@ -1,54 +1,96 @@
-from modelos.tabuleiro import TabuleiroParte, Tabuleiro
+from modelos.tabuleiro import Tabuleiro
 from controladores.embarcacao_controlador import EmbarcacoesControlador
 
 class TabuleiroControlador():
-    _instance = None 
-    _tabuleiro = Tabuleiro()
-    
-    
-    @classmethod
-    def get_instance(cls):
-        if cls._instance is None:
-            cls._instance = TabuleiroControlador()
-        return cls._instance
+
+    # ========================== Controlar área da parte do tabuleiro
 
     @classmethod
-    def checar_espaco(cls, linha, coluna):
-        return linha + coluna
-
-    @classmethod
-    def sobreposicao_embarcacao(cls, linha, coluna):
-        
-        try:
-            if not cls.get_instance().checar_espaco(linha, coluna):
-                return True  
-    # Embarcação não cabe no tabuleiro
-            for i in range(10):
-                coord_x = chr(ord('A') + linha)
-                coord_y = coluna + i
-    # Coordenadas fora dos limites
-                if coord_x not in cls.get_instance()._tabuleiro._parte_a._dict_alphanum or coord_y >= len(cls.get_instance()._tabuleiro._parte_a._matrix[0]):
-                    return True 
-    # Navio sobrepondo navio
-                if cls.get_instance()._tabuleiro._parte_a.get_quadrante(coord_x, coord_y) != 'X':
-                    return True 
-    # Índicie fora dos limites do tabuleiro
-        except IndexError:
-            return True
-        return False
-
-    @classmethod
-           
-    def representacao_tabuleiro(self):
-        representacao = ' '
-        for linha in self._tabuleiro._parte_a._matrix:
-           representacao += ' '.join(linha) + '\n'
-           
+    def pegar_tabuleiro_por_parte(cls, tabuleiro: Tabuleiro, parte_tabuleiro: str):
+        tabuleiro_parte = tabuleiro.devolver_tabuleiro_por_parte(parte_tabuleiro)
+        representacao = []
+        for linha in tabuleiro_parte:
+           representacao.append(''.join(linha)) 
         return representacao
-       
+    
     @classmethod
-    def enviar_tabuleiro(cls, jogador):
-        bytes_data = bytes(cls.get_instance().representacao_tabuleiro(), 'utf-8')
-        jogador.sendall(bytes_data)
+    def pegar_tabuleiro_camuflado_por_parte(cls, tabuleiro: Tabuleiro, parte_tabuleiro: str):
+        tabuleiro_parte = tabuleiro.devolver_tabuleiro_camuflado_por_parte(parte_tabuleiro)
+        representacao = []
+        for linha in tabuleiro_parte:
+           representacao.append(''.join(linha)) 
+        return representacao
+    
+    # ========================== Controlar peças no tabuleiro
+    
+    # ========== Embarcações para colocar
 
- 
+    @classmethod
+    def definir_embarcacoes_para_colocar(cls, tabuleiro: Tabuleiro):
+        lista : list = EmbarcacoesControlador.criar_embarcacoes()
+        tabuleiro.definir_embarcacoes_tabuleiro(lista)
+    
+    @classmethod
+    def listar_embarcacoes_para_colocar(cls, tabuleiro: Tabuleiro, parte_tabuleiro: str):
+        return tabuleiro.delvover_embarcacoes_para_colocar(parte_tabuleiro)
+    
+    @classmethod
+    def pegar_embarcacao_para_colocar_por_nome(cls, tabuleiro: Tabuleiro, parte_tabuleiro: str, nome_embarcacao: str):
+        embarcacoes_para_colocar = cls.listar_embarcacoes_para_colocar(tabuleiro, parte_tabuleiro)
+        embarcacao = None
+
+        for e in embarcacoes_para_colocar:
+            if e._nome == nome_embarcacao:
+                embarcacao = e
+
+        if (embarcacao != None):
+            return embarcacao
+        return False
+    
+    @classmethod 
+    def remover_embarcacao_da_lista_colocar(cls, tabuleiro: Tabuleiro, parte_tabuleiro: str, embarcacao: object):
+        tabuleiro.remover_embarcacao_para_colocar_da_parte(parte_tabuleiro, embarcacao)
+
+    # ========== Embarcações para vivas
+    
+    @classmethod
+    def definir_embarcacao_viva_na_parte(cls, tabuleiro: Tabuleiro, parte_tabuleiro: str, embarcacao: object):
+        tabuleiro.definir_embarcacao_viva_na_parte(parte_tabuleiro, embarcacao)
+
+    @classmethod
+    def listar_embarcacoes_vivas(cls, tabuleiro: Tabuleiro, parte_tabuleiro: str):
+        return tabuleiro.delvover_embarcacoes_vivas(parte_tabuleiro)
+
+    @classmethod 
+    def remover_embarcacao_da_lista_viva(cls, tabuleiro: Tabuleiro, parte_tabuleiro: str, embarcacao: object):
+        tabuleiro.remover_embarcacao_viva(parte_tabuleiro, embarcacao)
+
+    # ========== Mudanças na área com as embarcações
+        
+    # Colocando embarcacoes no tabuleiro             
+    @classmethod
+    def colocar_embarcacoes_no_tabuleiro(cls, tabuleiro: Tabuleiro, parte_tabuleiro: str, nome_embarcacao: str, coord_x: str, coord_y: int, orientacao: str):
+
+        embarcacao = cls.pegar_embarcacao_para_colocar_por_nome(tabuleiro, parte_tabuleiro, nome_embarcacao)
+        if embarcacao == False:
+            return False
+
+        checar_posicionamento = tabuleiro.colocar_embarcacao_na_parte(parte_tabuleiro, embarcacao, coord_x, coord_y, orientacao)
+
+        if checar_posicionamento == True:
+            cls.definir_embarcacao_viva_na_parte(tabuleiro, parte_tabuleiro, embarcacao)
+            cls.remover_embarcacao_da_lista_colocar(tabuleiro, parte_tabuleiro, embarcacao)
+            return True
+        else:
+            return False
+        
+    # ========== Ações no tabuleiro
+    
+    @classmethod
+    def disparo(cls, tabuleiro: Tabuleiro, parte_tabuleiro: str, coord_x: str, coord_y: int):
+        return tabuleiro.disparo(parte_tabuleiro, coord_x, coord_y)
+    
+    @classmethod
+    def comparar_tabuleiros_por_parte(cls, tabuleiro: Tabuleiro, parte_tabuleiro: str):
+        return tabuleiro.comparar_tabuleiros_por_parte(parte_tabuleiro)
+        
