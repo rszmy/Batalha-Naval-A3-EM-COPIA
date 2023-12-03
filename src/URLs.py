@@ -41,23 +41,23 @@ def remover_jogador_por_nome(nome: str):
 # ========================== Tabuleiro
 
 #Para teste
-@app.get("/tabuleiro")
-async def mostrar_tabuleiro():
-    tabuleiro : Tabuleiro = Tabuleiro()
-    return TabuleiroControlador.pegar_tabuleiro_por_parte(tabuleiro, "a")
+tabuleiro : Tabuleiro = Tabuleiro()
+TabuleiroControlador.definir_embarcacoes_para_colocar(tabuleiro)
+
+#Para teste
+@app.get("/tabuleiro/{parte}")
+async def mostrar_tabuleiro(parte: str):
+    return TabuleiroControlador.pegar_tabuleiro_por_parte(tabuleiro, parte)
 
 #========================== Embarcação
 
 #Para teste   
 @app.get('/embarcacao/{embarcacao}/{coord_x}/{coord_y}/{orientacao}/{parte}')
-async def colocar_embarcacao(embarcacao : str, coord_x : int, coord_y : int, orientacao : str, parte : str):
-    tabuleiro : Tabuleiro = Tabuleiro()
-    return TabuleiroControlador.colocar_embarcacoes_no_tabuleiro(tabuleiro, embarcacao, coord_x, coord_y, orientacao, parte)
+async def colocar_embarcacao(embarcacao : str, coord_x : str, coord_y : int, orientacao : str, parte : str):
+    return TabuleiroControlador.colocar_embarcacoes_no_tabuleiro(tabuleiro, parte, embarcacao, coord_x, coord_y, orientacao)
 
 #Para teste   
 @app.get('/embarcacao/teste')
 async def teste_embarcacao():
-    tabuleiro : Tabuleiro = Tabuleiro()
-    TabuleiroControlador.definir_embarcacoes_para_colocar(tabuleiro)
     return TabuleiroControlador.listar_embarcacoes_para_colocar(tabuleiro, "a")
 
