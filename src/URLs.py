@@ -44,7 +44,7 @@ def remover_jogador_por_nome(nome: str):
 @app.get("/tabuleiro")
 async def mostrar_tabuleiro():
     tabuleiro : Tabuleiro = Tabuleiro()
-    return TabuleiroControlador.representacao_tabuleiro(tabuleiro)
+    return TabuleiroControlador.pegar_tabuleiro_por_parte(tabuleiro, "a")
 
 #========================== Embarcação
 

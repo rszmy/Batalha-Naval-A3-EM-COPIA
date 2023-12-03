@@ -2,6 +2,14 @@ from modelos.tabuleiro import Tabuleiro
 from controladores.embarcacao_controlador import EmbarcacoesControlador
 
 class TabuleiroControlador():
+
+    @classmethod
+    def pegar_tabuleiro_por_parte(self, tabuleiro: Tabuleiro, parte_tabuleiro: str):
+        tabuleiro_parte = tabuleiro.devolver_tabuleiro_por_parte(parte_tabuleiro)
+        representacao = []
+        for linha in tabuleiro_parte:
+           representacao.append(''.join(linha)) 
+        return representacao
     
     #Criando embarcacoes pro tabuleiro
     @classmethod
@@ -10,38 +18,44 @@ class TabuleiroControlador():
         tabuleiro.definir_embarcacoes_tabuleiro(lista)
     
     @classmethod
-    def listar_embarcacoes_para_colocar(cls, tabuleiro: Tabuleiro, parte_tabuleiro : str):
+    def listar_embarcacoes_para_colocar(cls, tabuleiro: Tabuleiro, parte_tabuleiro: str):
         return tabuleiro.delvover_embarcacoes_por_parte(parte_tabuleiro)
     
     @classmethod
-    def definir_embarcacao_viva(cls, tabuleiro: Tabuleiro, nome_embarcacao : str, parte_tabuleiro : str):
+    def pegar_embarcacao_para_colocar_por_nome(cls, tabuleiro: Tabuleiro, parte_tabuleiro: str, nome_embarcacao: str):
         embarcacoes_para_colocar = cls.listar_embarcacoes_para_colocar(tabuleiro, parte_tabuleiro)
         embarcacao = None
-        
+
         for e in embarcacoes_para_colocar:
             if e['nome'] == nome_embarcacao:
                 embarcacao = e
-            else:
-                raise ValueError('Embarcação não existe!')
-            
-            tabuleiro.definir_embarcacao_viva_na_parte(embarcacao)
+
+        if (embarcacao != None):
             return embarcacao
+        return False
+    
+    @classmethod
+    def definir_embarcacao_viva_na_parte(cls, tabuleiro: Tabuleiro, parte_tabuleiro: str, embarcacao: object):
+        tabuleiro.definir_embarcacao_viva_na_parte(embarcacao, parte_tabuleiro)
         
     # Colocando embarcacoes no tabuleiro             
     # @classmethod
-    # def colocar_embarcacoes_no_tabuleiro(cls, tabuleiro: Tabuleiro, parte: str, embarcacao: str, coord_x: int, coord_y: int, orientacao: str):
+    # def colocar_embarcacoes_no_tabuleiro(cls, tabuleiro: Tabuleiro, parte_tabuleiro: str, nome_embarcacao: str, coord_x: int, coord_y: int, orientacao: str):
         
     #     if not(0 <= coord_x < 10 and 0 <= coord_y < 10):
     #         raise ValueError('Coordenadas invalidas')
+        
+    #     embarcacao = cls.pegar_embarcacao_para_colocar_por_nome(tabuleiro, parte_tabuleiro, nome_embarcacao)
+        
     #     for i in range(tabuleiro.definir_embarcacao_viva_na_parte[embarcacao]):
     #         if orientacao == 'horizontal':
-    #             if coord_y + i >= 10 or tabuleiro.devolver_tabuleiro_por_parte(parte)[coord_x][coord_y + i] != 'X':
+    #             if coord_y + i >= 10 or tabuleiro.devolver_tabuleiro_por_parte(parte_tabuleiro)[coord_x][coord_y + i] != 'X':
     #                 raise ValueError('Outra embarcação aqui irmão')
-    #             tabuleiro.devolver_tabuleiro_por_parte(parte)[coord_x][coord_y + i] = embarcacao
+    #             tabuleiro.devolver_tabuleiro_por_parte(parte_tabuleiro)[coord_x][coord_y + i] = embarcacao
     #         elif orientacao == 'vertical':
-    #             if coord_x + i >= 10 or tabuleiro.devolver_tabuleiro_por_parte(parte)[coord_x + i][coord_y] != 'X':
+    #             if coord_x + i >= 10 or tabuleiro.devolver_tabuleiro_por_parte(parte_tabuleiro)[coord_x + i][coord_y] != 'X':
     #                 raise ValueError('Outra embarcação aqui irmão')
-    #             tabuleiro.devolver_tabuleiro_por_parte(parte)[coord_x + i][coord_y] = embarcacao
+    #             tabuleiro.devolver_tabuleiro_por_parte(parte_tabuleiro)[coord_x + i][coord_y] = embarcacao
     #         else:
     #             raise ValueError('Orientação errada')
         
@@ -69,11 +83,3 @@ class TabuleiroControlador():
     #     except IndexError:
     #         return True
     #     return False
-
-    @classmethod
-    def representacao_tabuleiro(self, tabuleiro: Tabuleiro):
-        tabuleiro_parte = tabuleiro.devolver_tabuleiro_por_parte("a")
-        representacao = []
-        for linha in tabuleiro_parte:
-           representacao.append(''.join(linha)) 
-        return representacao
