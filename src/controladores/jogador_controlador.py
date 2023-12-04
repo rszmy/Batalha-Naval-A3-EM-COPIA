@@ -55,3 +55,7 @@ class JogadorControlador:
     @classmethod
     def remover_jogador_por_nome(cls, nome: str):
         JogadorDB.get_instance().remover_jogador_do_banco(nome)
+
+    @classmethod
+    def aumentar_pontuacao_por_nome(cls, nome: str):
+        JogadorDB.get_instance().aumentar_pontuacao_por_nome(nome)

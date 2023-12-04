@@ -49,6 +49,7 @@ class PartidaControlador:
     
     @classmethod
     def passar_turno(cls, id: int):
+        cls.checar_fim_do_jogo(id)
         return PartidaDB.get_instance().passar_turno(id)
     
     @classmethod
@@ -178,9 +179,17 @@ class PartidaControlador:
             return {"message": "Jogador não pertence ao jogo"}
 
     @classmethod    
-    def checar_fim_do_jogo():
-        pass
+    def checar_fim_do_jogo(cls, id: int):
+        tabuleiro = cls.pegar_tabuleiro_por_id(id)
+        checagem_a = TabuleiroControlador.comparar_tabuleiros_por_parte("a")
+        checagem_b = TabuleiroControlador.comparar_tabuleiros_por_parte("b")
+
+        if checagem_a == True:
+            cls.finalizar_jogo(id, "b")
+        elif checagem_b == True:
+            cls.finalizar_jogo(id, "a")
 
     @classmethod
-    def finalizar_jogo():
-        pass
+    def finalizar_jogo(cls, id: int, vencedor: str):
+        JogadorControlador.aumentar_pontuacao_por_nome(vencedor)
+        cls.terminar_partida_por_id(id)
