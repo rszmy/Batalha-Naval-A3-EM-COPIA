@@ -71,6 +71,18 @@ class PartidaControlador:
         return rep_list
     
     @classmethod
+    def checar_embarcacoes_disponiveis(cls, id: int, nome_jogador: str):
+        jogador_a = cls.pegar_nome_jogador_por_id(id, "a")
+        jogador_b = cls.pegar_nome_jogador_por_id(id, "b")
+
+        if (jogador_a == nome_jogador):
+            return TabuleiroControlador.listar_embarcacoes_para_colocar(id, "a")
+        elif (jogador_b == nome_jogador):
+            return TabuleiroControlador.listar_embarcacoes_para_colocar(id, "b")
+        else: 
+            return {"message": "Jogador não pertence ao jogo"}
+        
+    @classmethod
     def colocar_embarcacao_tabuleiro(cls, id: int, nome_jogador: str, embarcao: str, coord_x: str, coord_y: int, orientacao: str):
         tabuleiro = cls.pegar_tabuleiro_por_id(id)
 

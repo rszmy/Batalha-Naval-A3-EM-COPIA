@@ -64,6 +64,10 @@ def checar_começo_de_partida(nome_jogador: str):
 def pegar_representacao_tabuleiro_partida(id: int, nome_jogador: str):
     return PartidaControlador.pegar_representacao_tabuleiro_partida(id, nome_jogador)
 
+@app.get("/partida/embarcacoes/peças/{id}/{nome_jogador}")
+def checar_embarcacoes_disponiveis(id: int, nome_jogador: str):
+    return PartidaControlador.checar_embarcacoes_disponiveis(id, nome_jogador)
+
 @app.patch("/partida/tabuleiro/peças/{id}/{nome_jogador}/{embarcacao}/{coord_x}/{coord_y}/{orientacao}")
 def colocar_embarcacao_tabuleiro(id: int, nome_jogador: str, embarcacao: str, coord_x: str, coord_y: int, orientacao: str):
     return PartidaControlador.colocar_embarcacao_tabuleiro(id, nome_jogador, embarcacao, coord_x, coord_y, orientacao)
