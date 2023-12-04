@@ -24,5 +24,19 @@ class AutenticacaoControlador:
         return AutenticacaoErros.USUARIO_OU_SENHA_INCORRETOS
     
     @classmethod
-    def checar_chave(chave: str):
-        return AutenticacaoDB.get_instance().checar_chave()
+    def checar_chave_expiracao(cls, chave: str):
+        return AutenticacaoDB.get_instance().checar_chave_expiracao(chave)
+    
+    @classmethod
+    def checar_chave_com_nome(cls, chave: str, nome_jogador: str):
+        return AutenticacaoDB.get_instance().checar_chave_com_nome(chave, nome_jogador)
+    
+    @classmethod
+    def checar_chave(cls, chave: str, nome_jogador: str):
+
+        checagem_1 = cls.checar_chave_expiracao(chave)
+        checagem_2 = cls.checar_chave_com_nome(chave, nome_jogador)
+
+        if (checagem_1 == True and checagem_2 == True):
+            return True
+        return False

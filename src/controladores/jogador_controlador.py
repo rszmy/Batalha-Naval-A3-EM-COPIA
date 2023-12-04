@@ -10,7 +10,7 @@ class JogadorControlador:
 
     @classmethod
     def filtrar_lista_de_jogadores(cls):
-        jogadores = cls.pegar_lista_de_jogadores
+        jogadores = cls.pegar_lista_de_jogadores()
         
         jogadores_dto = []
         for jogador in jogadores:

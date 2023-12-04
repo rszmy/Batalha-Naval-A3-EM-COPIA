@@ -4,17 +4,18 @@ import hashlib
 
 class AutenticacaoDB():
 
-    _get_instance = None
-    _sessoes : list[AutenticacaoSessao]
-
-    def __init__(self: "AutenticacaoDB"):
-        self._sessoes = []
+    _instance = None
+    _sessoes : list[AutenticacaoSessao] = []
 
     @classmethod
     def get_instance(cls):
-        if cls._get_instance is None:
-            cls._get_instance = AutenticacaoDB()
-        return cls._get_instance
+        if cls._instance is None:
+            cls._instance = AutenticacaoDB()
+        return cls._instance
+    
+    @classmethod
+    def listar_sessoes(cls):
+        return cls.get_instance()._sessoes
     
     @classmethod
     def pegar_hash_por_nome(cls, nome: str, lista: list):
@@ -36,14 +37,23 @@ class AutenticacaoDB():
 
         chave = hashlib.md5((nome + str(expiracao.timestamp())).encode('utf-8'))
         
-        session : AutenticacaoSessao = AutenticacaoSessao(nome, chave.hexdigest(), expiracao)
-        cls.get_instance()._sessoes.append(session)
+        sessao : AutenticacaoSessao = AutenticacaoSessao(nome, chave.hexdigest(), expiracao)
+        cls.get_instance()._sessoes.append(sessao)
 
-        return session._chave
+        return sessao._chave
     
     @classmethod
-    def checar_chave(cls, chave: str):
-        for session in cls.get_instance()._sessoes:
-            if(session._chave == chave and session._expiracao > datetime.now()):
+    def checar_chave_expiracao(cls, chave: str):
+        sessoes = cls.get_instance().listar_sessoes()
+        for sessao in sessoes:
+            if(sessao._chave == chave and sessao._expiracao > datetime.now()):
+                return True
+        return False
+    
+    @classmethod
+    def checar_chave_com_nome(cls, chave: str, nome_jogador: str):
+        sessoes = cls.get_instance().listar_sessoes()
+        for sessao in sessoes:
+            if(sessao._chave == chave and sessao._nome == nome_jogador):
                 return True
         return False
