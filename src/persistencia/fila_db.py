@@ -1,4 +1,4 @@
-from src.modelos.fila import Fila
+from modelos.fila import Fila
 
 class FilaDB():
 
