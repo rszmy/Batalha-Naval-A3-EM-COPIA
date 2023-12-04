@@ -2,6 +2,7 @@ from modelos.tabuleiro import Tabuleiro
 from modelos.jogador import Jogador
 import itertools
 
+# Classe modelo da partida. Possui dois jogadores participantes e o tabuleiro.
 class Partida():
 
     _id : int
@@ -12,6 +13,7 @@ class Partida():
     _repeticoes_jogadas: int
     _status: str
 
+    # Utilizado para fazer um ID que se auto-incrementa a cada objeto criado.
     id_obj = itertools.count(1)
 
     def __init__(self, jogador_a: Jogador, jogador_b: Jogador):

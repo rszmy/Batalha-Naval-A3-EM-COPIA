@@ -1,4 +1,4 @@
-#classe embarcações
+# Classe modelo das embarcações.
 class Embarcacao():
     
     _nome : str
@@ -8,17 +8,19 @@ class Embarcacao():
         self._nome = nome
         self._formato = formato
 
-#constroi as embarcações
+# Classe fabrica que constroí embarcações.
 class FabricaEmbarcacao():
     
     _instance = None 
     
+    # Implementação singleton.
     @classmethod
     def instance(cls):
         if(cls._instance == None):
             cls._instance = FabricaEmbarcacao()
         return cls._instance
     
+    # Método fabrica.
     def fabrica(cls, nome:str):
         match nome:
             case "Submarino":

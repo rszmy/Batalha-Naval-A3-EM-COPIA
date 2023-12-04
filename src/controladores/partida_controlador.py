@@ -2,6 +2,7 @@ from persistencia.partida_db import PartidaDB
 from controladores.tabuleiro_controlador import TabuleiroControlador
 from controladores.jogador_controlador import JogadorControlador
 
+# Controlador da partida.
 class PartidaControlador:
 
     @classmethod

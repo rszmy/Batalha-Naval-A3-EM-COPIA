@@ -1,6 +1,7 @@
 from modelos.tabuleiro import Tabuleiro
 from controladores.embarcacao_controlador import EmbarcacoesControlador
 
+# Controlador do tabuleiro
 class TabuleiroControlador():
 
     # ========================== Controlar área da parte do tabuleiro

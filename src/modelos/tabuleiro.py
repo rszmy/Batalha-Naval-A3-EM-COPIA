@@ -1,6 +1,7 @@
 from modelos.embarcacao import Embarcacao
 import copy
 
+# Método que representa a parte to tabuleiro
 class TabuleiroParte():
 
     _coord_x = None
@@ -105,7 +106,8 @@ class TabuleiroParte():
         if self._area_tabuleiro == self._area_tabuleiro_camuflada:
             return True
         return False              
-    
+
+# Método que representa o tabuleiro, possuind partes do tabuleiro.
 class Tabuleiro():
     
     _parte_a : TabuleiroParte = None
@@ -194,6 +196,7 @@ class Tabuleiro():
             return False
         
     # ========== Ações no tabuleiro
+    
     def disparo(self, parte: str, coord_x: str, coord_y: int):
         if (parte == "a"):
             return self._parte_a.disparo(coord_x, coord_y)

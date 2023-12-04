@@ -1,6 +1,7 @@
 from modelos.jogador import Jogador
 from persistencia.config_db import ConfigDB
 
+# DB do jogador aplicando singleton. Salva mudanças no banco de dados.
 class JogadorDB():
 
     _instance = None

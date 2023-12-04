@@ -1,5 +1,6 @@
 from modelos.jogador import Jogador
 
+# Classe modelo para fila para entrar em partidas. Usa métodos de inscrição e desinscrição.
 class Fila():
     _jogadores : list[Jogador]
 
