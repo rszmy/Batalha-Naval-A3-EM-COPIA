@@ -64,3 +64,40 @@ class PartidaDB():
         
         return tabuleiro
     
+    @classmethod
+    def pegar_status_por_id(cls, id: int):
+        lista_de_partidas = cls.get_instance().listar_partidas()
+        status = ""
+
+        for partida in lista_de_partidas:
+            if partida._id == id:
+                status = partida._status
+        
+        return status
+    
+    @classmethod 
+    def atualizar_status_por_id(cls, id: int, novo_status: str):
+        lista_de_partidas = cls.get_instance().listar_partidas()
+
+        for partida in lista_de_partidas:
+            if partida._id == id:
+                partida._status = novo_status
+
+    @classmethod
+    def pegar_turno_por_id(cls, id: int):
+        lista_de_partidas = cls.get_instance().listar_partidas()
+        turno = ""
+
+        for partida in lista_de_partidas:
+            if partida._id == id:
+                turno = partida._turno
+        
+        return turno
+    
+    @classmethod
+    def passar_turno(cls, id: int):
+        lista_de_partidas = cls.get_instance().listar_partidas()
+
+        for partida in lista_de_partidas:
+            if partida._id == id:
+                partida._turno += 1

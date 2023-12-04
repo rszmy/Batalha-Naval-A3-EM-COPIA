@@ -42,6 +42,10 @@ class PartidaControlador:
     @classmethod
     def pegar_turno_por_id(cls, id: int):
         return PartidaDB.get_instance().pegar_turno_por_id(id)
+    
+    @classmethod
+    def passar_turno(cls, id: int):
+        return PartidaDB.get_instance().passar_turno(id)
 
     @classmethod
     def pegar_representacao_tabuleiro_partida(cls, id: int, nome_jogador: str):
@@ -79,3 +83,16 @@ class PartidaControlador:
             return TabuleiroControlador.colocar_embarcacoes_no_tabuleiro(tabuleiro, "b", embarcao, coord_x, coord_y, orientacao)
         else: 
             return {"message": "Jogador não pertence ao jogo"}
+        
+    @classmethod
+    def checar_fim_preparacao(cls, tabuleiro: object):
+        lista_total = []
+        lista_a = TabuleiroControlador.listar_embarcacoes_para_colocar(tabuleiro, "a")
+        lista_b = TabuleiroControlador.listar_embarcacoes_para_colocar(tabuleiro, "b")
+        
+        lista_total.append(lista_a)
+        lista_total.append(lista_b)
+        
+        if lista_total == []:
+            return True
+        return False
