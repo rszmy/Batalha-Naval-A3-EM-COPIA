@@ -3,14 +3,24 @@ from fastapi import FastAPI
 from controladores.jogador_controlador import JogadorControlador
 from controladores.fila_controlador import FilaControlador
 from controladores.partida_controlador import PartidaControlador
+import uvicorn
+
 
 app = FastAPI()
 
 # ========================== 
 
-@app.get("/")
-async def menu():
-    return {"message": "Hello World"}
+
+if __name__ == "__main__":
+  uvicorn.run("URLs:app", host="0.0.0.0", port=8000, reload=True)
+  
+
+@app.get("/", tags=["Root"])
+async def read_root():
+  return { 
+    "hello world"
+   }
+
 
 # ========================== Jogador
 
