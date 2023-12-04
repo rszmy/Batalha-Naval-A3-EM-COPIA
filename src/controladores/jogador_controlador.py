@@ -13,8 +13,8 @@ class JogadorControlador:
 
             jogadores_dto.append({
                 "nome": jogador._nome,
-                "pontuacao": int(jogador._pontuacao_acumulada),
-                "email": jogador._email
+                "email": jogador._email,
+                "pontuacao": int(jogador._pontuacao_acumulada)
             })
 
         lista_filtrada : [] = jogadores_dto
@@ -55,3 +55,7 @@ class JogadorControlador:
     @classmethod
     def remover_jogador_por_nome(cls, nome: str):
         JogadorDB.get_instance().remover_jogador_do_banco(nome)
+
+    @classmethod
+    def aumentar_pontuacao_por_nome(cls, nome: str):
+        JogadorDB.get_instance().aumentar_pontuacao_por_nome(nome)
