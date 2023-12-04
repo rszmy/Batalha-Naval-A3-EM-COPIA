@@ -53,6 +53,21 @@ class JogadorDB():
             ConfigDB.executa_sql(sqlite_update, valores)
 
             return True
+        
+    @classmethod
+    def edita_senha_no_banco(cls, nome: str, nova_senha: str):
+        lista_filtrada : list[Jogador] = [x for x in  cls.get_instance()._lista_de_jogadores if x._senha == nova_senha]
+        if(len(lista_filtrada) == 0):
+            return False
+        else:
+            jogador_alvo : Jogador = lista_filtrada[0]
+            jogador_alvo._senha = nova_senha
+
+            sqlite_update = """UPDATE Jogadores SET senha = ? where nome = ?"""
+            valores = (jogador_alvo._senha, jogador_alvo._nome)
+            ConfigDB.executa_sql(sqlite_update, valores)
+
+            return True
 
     @classmethod
     def remover_jogador_do_banco(cls, nome: str):
@@ -60,3 +75,18 @@ class JogadorDB():
         valor = (nome,)
         sqlite_delete = """DELETE FROM Jogadores where nome = ?"""
         ConfigDB.executa_sql(sqlite_delete, valor)
+
+    @classmethod
+    def aumentar_pontuacao_por_nome(cls, nome: str):
+        lista_filtrada : list[Jogador] = [x for x in  cls.get_instance()._lista_de_jogadores if x._nome == nome]
+        if(len(lista_filtrada) == 0):
+            return False
+        else:
+            jogador_alvo : Jogador = lista_filtrada[0]
+            jogador_alvo._pontuacao_acumulada += 1
+
+            sqlite_update = """UPDATE Jogadores SET pontuacao = ? where nome = ?"""
+            valores = (jogador_alvo._pontuacao_acumulada, jogador_alvo._nome)
+            ConfigDB.executa_sql(sqlite_update, valores)
+
+            return True
