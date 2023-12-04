@@ -93,10 +93,10 @@ class TabuleiroParte():
         
         match pos:
                 case "X":
-                    return {"message": "Tiro na água!"}
+                    return False
                 case "N":
                     self.revelar_embarcacao(coord_xx, coord_yy)
-                    return {"message": "Peça revalda!"}
+                    return True
     
     def revelar_embarcacao(self, coord_xx: int, coord_yy: str):
         self._area_tabuleiro_camuflada[coord_xx][coord_yy] = self._area_tabuleiro[coord_xx][coord_yy]

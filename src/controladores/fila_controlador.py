@@ -1,5 +1,6 @@
 from persistencia.fila_db import FilaDB
 from controladores.jogador_controlador import JogadorControlador
+from controladores.partida_controlador import PartidaControlador
 from enum import Enum 
 
 class FilaControladorErro(Enum):
@@ -12,6 +13,15 @@ class FilaControlador:
     def inscrever_na_fila(cls, nome_jogador: str):
         lista_de_jogadores = JogadorControlador.listar_todos_os_jogadores()
         jogador = None
+
+        fila = FilaDB.instance().mostrar_jogadores_na_fila()
+        for jogador in fila:
+            if jogador['nome'] == nome_jogador:
+                return {"message": "Você já está na fila"}
+
+        checagem_de_partida = PartidaControlador.checar_jogador_em_partida(nome_jogador)
+        if (checagem_de_partida["message"] != "Você não está em fila e nem em uma partida"):
+            return {"message": "Você já está em uma partida"}
         
         for j in lista_de_jogadores:
             if j['nome'] == nome_jogador:
@@ -22,7 +32,7 @@ class FilaControlador:
             jogadores_das_partidas = cls.checar_estado_da_fila()
             if (jogadores_das_partidas):
                 while (len(jogadores_das_partidas) / 2) > 0:
-                    # PartidaControlador.criar_partida(jogadores_das_partidas[0], jogadores_das_partidas[1])
+                    PartidaControlador.começar_nova_partida(jogadores_das_partidas[0], jogadores_das_partidas[1])
                     for _ in range(2): jogadores_das_partidas.pop(0)
             return True
         else:
@@ -64,5 +74,10 @@ class FilaControlador:
     
     # Precisa da partida - Método para checar se seu nome está na fila e se sua partida começou
     @classmethod
-    def checar_confirmacao_da_partida(nome: str):
-        pass
+    def checar_confirmacao_da_partida(cls, nome_jogador: str):
+        fila = FilaDB.instance().mostrar_jogadores_na_fila()
+
+        for jogador in fila:
+            if jogador['nome'] == nome_jogador:
+                return {"message": "Aguardando jogadores para partida"}
+        return PartidaControlador.checar_jogador_em_partida(nome_jogador)

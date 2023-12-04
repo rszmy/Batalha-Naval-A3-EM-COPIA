@@ -2,8 +2,9 @@
 from fastapi import FastAPI
 from controladores.jogador_controlador import JogadorControlador
 from controladores.fila_controlador import FilaControlador
-from controladores.tabuleiro_controlador import TabuleiroControlador
+from controladores.partida_controlador import PartidaControlador
 import uvicorn
+
 
 app = FastAPI()
 
@@ -61,6 +62,27 @@ def sair_da_fila(nome_jogador: str):
 def mostrar_jogadores_na_fila():
     return FilaControlador.mostrar_jogadores_na_fila()
 
+@app.get("/fila/checagem/{nome_jogador}")
+def checar_começo_de_partida(nome_jogador: str):
+    return FilaControlador.checar_confirmacao_da_partida(nome_jogador)
+
 # ========================== Auth
 
 # ========================== Partida
+
+@app.get("/partida/tabuleiro/{id}/{nome_jogador}")
+def pegar_representacao_tabuleiro_partida(id: int, nome_jogador: str):
+    return PartidaControlador.pegar_representacao_tabuleiro_partida(id, nome_jogador)
+
+@app.get("/partida/embarcacoes/peças/{id}/{nome_jogador}")
+def checar_embarcacoes_disponiveis(id: int, nome_jogador: str):
+    return PartidaControlador.checar_embarcacoes_disponiveis(id, nome_jogador)
+
+@app.patch("/partida/tabuleiro/peças/{id}/{nome_jogador}/{embarcacao}/{coord_x}/{coord_y}/{orientacao}")
+def colocar_embarcacao_tabuleiro(id: int, nome_jogador: str, embarcacao: str, coord_x: str, coord_y: int, orientacao: str):
+    return PartidaControlador.colocar_embarcacao_tabuleiro(id, nome_jogador, embarcacao, coord_x, coord_y, orientacao)
+
+@app.get("/partida/tabuleiro/disparo/{id}/{nome_jogador}/{coord_x}/{coord_y}/")
+def realizar_disparo(id: int, nome_jogador: str, coord_x: str, coord_y: int):
+    return PartidaControlador.realizar_disparo(id, nome_jogador, coord_x, coord_y)
+    
