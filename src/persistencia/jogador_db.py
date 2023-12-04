@@ -1,5 +1,5 @@
-from modelos.jogador import Jogador
-from persistencia.config_db import ConfigDB
+from src.modelos.jogador import Jogador
+from src.persistencia.config_db import ConfigDB
 
 class JogadorDB():
 

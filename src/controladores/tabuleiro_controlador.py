@@ -1,5 +1,5 @@
-from modelos.tabuleiro import Tabuleiro
-from controladores.embarcacao_controlador import EmbarcacoesControlador
+from src.modelos.tabuleiro import Tabuleiro
+from src.controladores.embarcacao_controlador import EmbarcacoesControlador
 
 class TabuleiroControlador():
 
