@@ -5,19 +5,19 @@ from controladores.jogador_controlador import JogadorControlador
 class PartidaControlador:
 
     @classmethod
+    def começar_nova_partida(cls, jogador_a: object, jogador_b: object):
+        PartidaDB().get_instance().começar_nova_partida(jogador_a, jogador_b)
+        id = cls.pegar_id_por_jogador(jogador_a)
+        tabuleiro = cls.pegar_tabuleiro_por_id(id)
+        TabuleiroControlador.definir_embarcacoes_para_colocar(tabuleiro)
+
+    @classmethod
     def listar_partidas(cls):
         return PartidaDB().get_instance().listar_partidas
     
     @classmethod
     def checar_jogador_em_partida(cls, nome_jogador: str):
         return PartidaDB().get_instance().checar_jogador_em_partida(nome_jogador)
-
-    @classmethod
-    def começar_nova_partida(cls, jogador_a: object, jogador_b: object):
-        PartidaDB().get_instance().começar_nova_partida(jogador_a, jogador_b)
-        id = cls.pegar_id_por_jogador(jogador_a)
-        tabuleiro = cls.pegar_tabuleiro_por_id(id)
-        TabuleiroControlador.definir_embarcacoes_para_colocar(tabuleiro)
 
     @classmethod
     def pegar_id_por_jogador(cls, jogador_a: object):
@@ -31,6 +31,18 @@ class PartidaControlador:
     def pegar_nome_jogador_por_id(cls, id: int, id_jogador: str):
         return PartidaDB.get_instance().pegar_nome_jogador_por_id(id, id_jogador)
     
+    @classmethod
+    def pegar_status_por_id(cls, id: int):
+        return PartidaDB.get_instance().pegar_status_por_id(id)
+
+    @classmethod 
+    def atualizar_status_por_id(cls, id: int, novo_status: str):
+        return PartidaDB.get_instance().atualizar_status_por_id(id, novo_status)
+
+    @classmethod
+    def pegar_turno_por_id(cls, id: int):
+        return PartidaDB.get_instance().pegar_turno_por_id(id)
+
     @classmethod
     def pegar_representacao_tabuleiro_partida(cls, id: int, nome_jogador: str):
         tabuleiro = cls.pegar_tabuleiro_por_id(id)
