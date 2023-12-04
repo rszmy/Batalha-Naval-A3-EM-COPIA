@@ -53,6 +53,12 @@ class JogadorControlador:
         JogadorDB.get_instance().editar_jogador_no_banco(nome, email)
 
     @classmethod
+    def editar_senha_do_jogador(cls, nome: str, nova_senha: str):
+        nova_senha = hashlib.md5(nova_senha.encode('utf-8'))
+        nova_senha = nova_senha.hexdigest()
+        JogadorDB.get_instance().edita_senha_no_banco(nome, nova_senha)
+
+    @classmethod
     def remover_jogador_por_nome(cls, nome: str):
         JogadorDB.get_instance().remover_jogador_do_banco(nome)
 

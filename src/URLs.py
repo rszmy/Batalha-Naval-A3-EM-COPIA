@@ -44,6 +44,10 @@ def adicionar_jogador(nome: str, email: str, senha: str):
 def editar_jogador_por_nome(nome: str, email: str):
     return JogadorControlador.editar_jogador_por_nome(nome, email)
 
+@app.patch("/jogadores/nova_senha/{nome}/{nova_senha}")
+def editar_senha_do_jogador(nome: str, nova_senha: str):
+    return JogadorControlador.editar_senha_do_jogador(nome, nova_senha)
+
 @app.delete("/jogadores/remoção/{nome}")
 def remover_jogador_por_nome(nome: str):
     return JogadorControlador.remover_jogador_por_nome(nome)
