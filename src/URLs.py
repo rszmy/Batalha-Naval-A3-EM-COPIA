@@ -1,4 +1,4 @@
-from typing import Union
+#from typing import Union
 from fastapi import FastAPI
 from controladores.jogador_controlador import JogadorControlador
 from controladores.fila_controlador import FilaControlador
@@ -6,7 +6,7 @@ from controladores.partida_controlador import PartidaControlador
 
 app = FastAPI()
 
-# ==========================
+# ========================== 
 
 @app.get("/")
 async def menu():
