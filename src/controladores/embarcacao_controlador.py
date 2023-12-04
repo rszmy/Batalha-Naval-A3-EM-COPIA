@@ -1,15 +1,17 @@
-from modelos.embarcacao import FabricaEmbarcacao, Embarcacao
+from modelos.embarcacao import FabricaEmbarcacao
 
 class EmbarcacoesControlador():
-
-    def criar_embarcacoes():
+    
+    @classmethod
+    def criar_embarcacoes(cls):
         embarcacoes = [
-            FabricaEmbarcacao.instance().create('Submarino'),
-            FabricaEmbarcacao.instance().create('Submarino'),
-            FabricaEmbarcacao.instance().create('Submarino'),
-            FabricaEmbarcacao.instance().create('Navio Pequeno'),
-            FabricaEmbarcacao.instance().create('Navio Pequeno'),
-            FabricaEmbarcacao.instance().create('Navio Medio'),
-            FabricaEmbarcacao.instance().create('Navio Grande'),
-            FabricaEmbarcacao.instance().create('Porta Aviões')
+            FabricaEmbarcacao.instance().fabrica('Submarino'),
+            FabricaEmbarcacao.instance().fabrica('Submarino'),
+            FabricaEmbarcacao.instance().fabrica('Submarino'),
+            FabricaEmbarcacao.instance().fabrica('Navio Pequeno'),
+            FabricaEmbarcacao.instance().fabrica('Navio Pequeno'),
+            FabricaEmbarcacao.instance().fabrica('Navio Médio'),
+            FabricaEmbarcacao.instance().fabrica('Navio Grande'),
+            FabricaEmbarcacao.instance().fabrica('Porta Aviões')
         ]
+        return embarcacoes
