@@ -5,8 +5,12 @@ import hashlib
 class JogadorControlador:
 
     @classmethod
+    def pegar_lista_de_jogadores (cls):
+        return JogadorDB.get_instance().listar_todos_os_jogadores()
+
+    @classmethod
     def filtrar_lista_de_jogadores(cls):
-        jogadores = JogadorDB.get_instance().listar_todos_os_jogadores()
+        jogadores = cls.pegar_lista_de_jogadores()
         
         jogadores_dto = []
         for jogador in jogadores:
