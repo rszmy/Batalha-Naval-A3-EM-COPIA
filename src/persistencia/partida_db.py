@@ -1,5 +1,6 @@
 from modelos.partida import Partida
 
+# DB das partidas aplicando singleton.
 class PartidaDB():
 
     _instance = None

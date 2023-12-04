@@ -2,6 +2,7 @@ from modelos.autenticacao_sessao import AutenticacaoSessao
 from datetime import datetime, timedelta
 import hashlib
 
+# DB da autenticação aplicando singleton.
 class AutenticacaoDB():
 
     _instance = None

@@ -3,10 +3,12 @@ from controladores.jogador_controlador import JogadorControlador
 from controladores.partida_controlador import PartidaControlador
 from enum import Enum 
 
+# Classe para definir erros do controlador da fila.
 class FilaControladorErro(Enum):
     JOGADOR_NAO_EXISTENTE = 0 
-    #======================================== retorna erro caso o jogador não esteja registrado e tente se inscrever
+    #======================================== Retorna erro caso o jogador não esteja registrado e tente se inscrever
 
+# Controlador da fila
 class FilaControlador:
 
     @classmethod

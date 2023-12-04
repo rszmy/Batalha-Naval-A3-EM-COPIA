@@ -3,10 +3,12 @@ from controladores.jogador_controlador import JogadorControlador
 from enum import Enum
 import hashlib
 
+# Classe para definir erros do controlador de auntenticações.
 class AutenticacaoErros(Enum):
     USUARIO_OU_SENHA_INCORRETOS = 1
     AUTENTICACAO_OK = 2
 
+# Controlador de auntenticações.
 class AutenticacaoControlador:
     
     @classmethod

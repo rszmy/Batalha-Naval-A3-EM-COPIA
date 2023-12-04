@@ -1,5 +1,6 @@
 import sqlite3
 
+# Classe para configuração do banco de dados sqlite.
 class ConfigDB():
 
     @classmethod

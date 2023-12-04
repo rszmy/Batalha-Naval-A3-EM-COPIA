@@ -1,3 +1,4 @@
+# Classe modelo para o jogador.
 class Jogador():
 
     _nome : str

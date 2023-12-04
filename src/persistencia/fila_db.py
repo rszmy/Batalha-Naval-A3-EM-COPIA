@@ -1,5 +1,6 @@
 from modelos.fila import Fila
 
+# DB da fila aplicando singleton.
 class FilaDB():
 
     _instance : "FilaDB" = None

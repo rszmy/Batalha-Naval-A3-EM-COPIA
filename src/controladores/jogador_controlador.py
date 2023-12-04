@@ -2,6 +2,7 @@ from persistencia.jogador_db import JogadorDB
 from modelos.jogador import Jogador
 import hashlib
 
+# Controlador do jogador.
 class JogadorControlador:
 
     @classmethod

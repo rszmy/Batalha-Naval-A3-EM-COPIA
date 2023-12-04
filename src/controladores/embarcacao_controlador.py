@@ -1,5 +1,6 @@
 from modelos.embarcacao import FabricaEmbarcacao
 
+# Controlador de embarcações
 class EmbarcacoesControlador():
     
     @classmethod
