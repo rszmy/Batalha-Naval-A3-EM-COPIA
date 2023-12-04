@@ -71,3 +71,8 @@ def checar_embarcacoes_disponiveis(id: int, nome_jogador: str):
 @app.patch("/partida/tabuleiro/peças/{id}/{nome_jogador}/{embarcacao}/{coord_x}/{coord_y}/{orientacao}")
 def colocar_embarcacao_tabuleiro(id: int, nome_jogador: str, embarcacao: str, coord_x: str, coord_y: int, orientacao: str):
     return PartidaControlador.colocar_embarcacao_tabuleiro(id, nome_jogador, embarcacao, coord_x, coord_y, orientacao)
+
+@app.get("/partida/tabuleiro/disparo/{id}/{nome_jogador}/{coord_x}/{coord_y}/")
+def realizar_disparo(id: int, nome_jogador: str, coord_x: str, coord_y: int):
+    return PartidaControlador.realizar_disparo(id, nome_jogador, coord_x, coord_y)
+    

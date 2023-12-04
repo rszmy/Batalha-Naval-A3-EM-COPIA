@@ -16,6 +16,10 @@ class PartidaDB():
         return cls.get_instance()._lista_de_partidas
     
     @classmethod
+    def terminar_partida_por_id(cls, id: int):
+        cls.get_instance()._lista_de_partidas = [p for p in  cls.get_instance()._lista_de_partidas if p.id != id]
+    
+    @classmethod
     def checar_jogador_em_partida(cls, nome_jogador: str):
         lista_de_partidas = cls.get_instance().listar_partidas()
 
@@ -86,7 +90,7 @@ class PartidaDB():
     @classmethod
     def pegar_turno_por_id(cls, id: int):
         lista_de_partidas = cls.get_instance().listar_partidas()
-        turno = ""
+        turno = 0
 
         for partida in lista_de_partidas:
             if partida._id == id:
@@ -101,3 +105,24 @@ class PartidaDB():
         for partida in lista_de_partidas:
             if partida._id == id:
                 partida._turno += 1
+
+    @classmethod
+    def pegar_repeticoes_por_id(cls, id: int):
+        lista_de_partidas = cls.get_instance().listar_partidas()
+        repeticoes = 0
+
+        for partida in lista_de_partidas:
+            if partida._id == id:
+                repeticoes = partida._repeticoes_jogadas
+        
+        return repeticoes
+    
+    @classmethod
+    def atualizar_repeticao_por_id(cls, id: int):
+        lista_de_partidas = cls.get_instance().listar_partidas()
+
+        for partida in lista_de_partidas:
+            if partida._id == id:
+                partida._repeticoes_jogadas += 1
+                if partida._repeticoes_jogadas == 4:
+                    partida._repeticoes_jogadas = 0
