@@ -54,7 +54,7 @@ class PartidaControlador:
     
     @classmethod
     def pegar_repeticoes_por_id(cls, id: int):
-        return PartidaDB.get_instance().pegar_repeticao_por_id(id)
+        return PartidaDB.get_instance().pegar_repeticoes_por_id(id)
     
     @classmethod
     def atualizar_repeticoes_por_id(cls, id: int):
@@ -128,7 +128,7 @@ class PartidaControlador:
         lista_total.append(lista_a)
         lista_total.append(lista_b)
         
-        if lista_total == []:
+        if lista_total == [[], []]:
             return True
         return False
     
@@ -141,12 +141,28 @@ class PartidaControlador:
         tabuleiro = cls.pegar_tabuleiro_por_id(id)
         jogador_a = cls.pegar_nome_jogador_por_id(id, "a")
         jogador_b = cls.pegar_nome_jogador_por_id(id, "b")
+        status = cls.pegar_status_por_id(id)
         turno = cls.pegar_turno_por_id(id)
         repeticoes = cls.pegar_repeticoes_por_id(id)
         resultado : bool
 
-        if (jogador_a == nome_jogador):
+        if (jogador_a == nome_jogador and status == "embate"):
             if (turno % 2 != 0):
+                resultado = TabuleiroControlador.disparo(tabuleiro, "b", coord_x, coord_y)
+                if resultado == True:
+                    if repeticoes < 2:
+                        cls.atualizar_repeticoes_por_id(id)
+                        return {"message": "Embarcação Encontrada!"}
+                    cls.atualizar_repeticoes_por_id(id)
+                    cls.passar_turno(id)
+                    return {"message": "Embarcação Encontrada!"}
+                else:
+                    cls.passar_turno(id)
+                    return {"message": "Tiro na água!"}
+            else:
+                return  {"message": "Não é seu turno ainda"}
+        elif (jogador_b == nome_jogador and status == "embate"):
+            if (turno % 2 == 0):
                 resultado = TabuleiroControlador.disparo(tabuleiro, "a", coord_x, coord_y)
                 if resultado == True:
                     if repeticoes < 3:
@@ -160,29 +176,16 @@ class PartidaControlador:
                     return {"message": "Tiro na água!"}
             else:
                 return  {"message": "Não é seu turno ainda"}
-        elif (jogador_b == nome_jogador):
-            if (turno % 2 == 0):
-                resultado = TabuleiroControlador.disparo(tabuleiro, "b", coord_x, coord_y)
-                if resultado == True:
-                    if repeticoes < 3:
-                        cls.atualizar_repeticoes_por_id(id)
-                        return {"message": "Embarcação Encontrada!"}
-                    cls.atualizar_repeticoes_por_id(id)
-                    cls.passar_turno(id)
-                    return {"message": "Embarcação Encontrada!"}
-                else:
-                    cls.passar_turno(id)
-                    return {"message": "Tiro na água!"}
-            else:
-                return  {"message": "Não é seu turno ainda"}
-        else: 
+        elif (jogador_a != nome_jogador and jogador_b != nome_jogador): 
             return {"message": "Jogador não pertence ao jogo"}
+        
+        return {"message": "Você não pode realizar disparos na fase de preparação"}
 
     @classmethod    
     def checar_fim_do_jogo(cls, id: int):
         tabuleiro = cls.pegar_tabuleiro_por_id(id)
-        checagem_a = TabuleiroControlador.comparar_tabuleiros_por_parte("a")
-        checagem_b = TabuleiroControlador.comparar_tabuleiros_por_parte("b")
+        checagem_a = TabuleiroControlador.comparar_tabuleiros_por_parte(tabuleiro, "a")
+        checagem_b = TabuleiroControlador.comparar_tabuleiros_por_parte(tabuleiro, "b")
 
         if checagem_a == True:
             cls.finalizar_jogo(id, "b")

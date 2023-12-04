@@ -17,7 +17,7 @@ class PartidaDB():
     
     @classmethod
     def terminar_partida_por_id(cls, id: int):
-        cls.get_instance()._lista_de_partidas = [p for p in  cls.get_instance()._lista_de_partidas if p.id != id]
+        cls.get_instance()._lista_de_partidas = [p for p in  cls.get_instance()._lista_de_partidas if p._id != id]
     
     @classmethod
     def checar_jogador_em_partida(cls, nome_jogador: str):
@@ -124,5 +124,5 @@ class PartidaDB():
         for partida in lista_de_partidas:
             if partida._id == id:
                 partida._repeticoes_jogadas += 1
-                if partida._repeticoes_jogadas == 4:
+                if partida._repeticoes_jogadas == 3:
                     partida._repeticoes_jogadas = 0

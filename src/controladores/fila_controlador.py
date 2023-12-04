@@ -13,6 +13,15 @@ class FilaControlador:
     def inscrever_na_fila(cls, nome_jogador: str):
         lista_de_jogadores = JogadorControlador.listar_todos_os_jogadores()
         jogador = None
+
+        fila = FilaDB.instance().mostrar_jogadores_na_fila()
+        for jogador in fila:
+            if jogador['nome'] == nome_jogador:
+                return {"message": "Você já está na fila"}
+
+        checagem_de_partida = PartidaControlador.checar_jogador_em_partida(nome_jogador)
+        if (checagem_de_partida["message"] != "Você não está em fila e nem em uma partida"):
+            return {"message": "Você já está em uma partida"}
         
         for j in lista_de_jogadores:
             if j['nome'] == nome_jogador:
