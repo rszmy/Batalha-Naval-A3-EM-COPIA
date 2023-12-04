@@ -1,4 +1,4 @@
-from src.modelos.jogador import Jogador
+from modelos.jogador import Jogador
 
 class Fila():
     _jogadores : list[Jogador]
