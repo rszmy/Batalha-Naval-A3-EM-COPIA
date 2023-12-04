@@ -1,4 +1,4 @@
-from modelos.embarcacao import Embarcacao
+from src.modelos.embarcacao import Embarcacao
 import copy
 
 class TabuleiroParte():
