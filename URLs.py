@@ -1,12 +1,12 @@
-from typing import Union
+#from typing import Union
 from fastapi import FastAPI
-from controladores.jogador_controlador import JogadorControlador
-from controladores.fila_controlador import FilaControlador
-from controladores.tabuleiro_controlador import TabuleiroControlador
+from src.controladores.jogador_controlador import JogadorControlador
+from src.controladores.fila_controlador import FilaControlador
+from src.controladores.tabuleiro_controlador import TabuleiroControlador
 
 app = FastAPI()
 
-# ==========================
+# ========================== 
 
 @app.get("/")
 async def menu():

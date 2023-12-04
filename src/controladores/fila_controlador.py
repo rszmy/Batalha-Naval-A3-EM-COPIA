@@ -1,5 +1,5 @@
-from persistencia.fila_db import FilaDB
-from controladores.jogador_controlador import JogadorControlador
+from src.persistencia.fila_db import FilaDB
+from src.controladores.jogador_controlador import JogadorControlador
 from enum import Enum 
 
 class FilaControladorErro(Enum):
