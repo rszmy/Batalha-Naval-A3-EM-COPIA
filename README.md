@@ -1,5 +1,5 @@
-# Batalha-Naval-A3-SDM
-Jogo de batalha naval desenvolvido para o projeto A3 da Unidade Curricular de Sistemas Distribuídos e Mobile.
+# Batalha-Naval-A3-EM
+Jogo de batalha naval desenvolvido para o projeto A3 da Unidade Curricular de Estruturas Matemáticas.
 
 - Para começarmos é preciso dar o comando para instalar a VENV (python.exe -m venv .venv) logo após é preciso acessar ela com o comando (..venv\Scripts\Activate.ps1) que acessa e entra na venv.
 
