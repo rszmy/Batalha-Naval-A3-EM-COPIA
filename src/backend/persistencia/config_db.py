@@ -5,7 +5,7 @@ class ConfigDB():
 
     @classmethod
     def executa_sql(cls, codigo_sql, valores):
-        with sqlite3.connect("../batalha_naval.sqlite") as conn:
+        with sqlite3.connect("../../batalha_naval.sqlite") as conn:
             if (valores != False):
                 try:
                     cursor = conn.cursor()
