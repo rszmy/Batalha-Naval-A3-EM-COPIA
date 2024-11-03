@@ -12,10 +12,10 @@ class TabuleiroParte():
     _lista_embarcacoes_vivas: list[Embarcacao]
 
     def __init__(self):
-        self._coord_x = "ABCDEFGHIJ"
-        self._coord_y = range(10)
-        self._area_tabuleiro = [["X" for x in range(10)] for x in self._coord_y]
-        self._area_tabuleiro_camuflada = [["X" for x in range(10)] for x in self._coord_y]
+        self._coord_x = "ABCDE"
+        self._coord_y = range(5)
+        self._area_tabuleiro = [["X" for x in range(5)] for x in self._coord_y]
+        self._area_tabuleiro_camuflada = [["X" for x in range(5)] for x in self._coord_y]
         self._lista_embarcacoes_para_colocar = []
         self._lista_embarcacoes_vivas = []
 
