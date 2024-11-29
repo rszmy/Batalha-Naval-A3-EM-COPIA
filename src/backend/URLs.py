@@ -1,5 +1,6 @@
 #from typing import Union
 from fastapi import FastAPI, Request, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from controladores.jogador_controlador import JogadorControlador
 from controladores.autenticacao_controlador import AutenticacaoControlador
 from controladores.fila_controlador import FilaControlador
@@ -8,6 +9,22 @@ import uvicorn
 
 
 app = FastAPI()
+
+origins = [
+    "http://localhost.tiangolo.com",
+    "https://localhost.tiangolo.com",
+    "http://localhost",
+    "http://localhost:3000",
+    "http://localhost:8000",
+]
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 # ========================== 
 
