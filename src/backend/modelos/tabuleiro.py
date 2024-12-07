@@ -12,10 +12,10 @@ class TabuleiroParte():
     _lista_embarcacoes_vivas: list[Embarcacao]
 
     def __init__(self):
-        self._coord_x = "ABCDEFGHIJ"
-        self._coord_y = range(10)
-        self._area_tabuleiro = [["X" for x in range(10)] for x in self._coord_y]
-        self._area_tabuleiro_camuflada = [["X" for x in range(10)] for x in self._coord_y]
+        self._coord_x = "ABCDE"
+        self._coord_y = range(5)
+        self._area_tabuleiro = [["X" for x in range(5)] for x in self._coord_y]
+        self._area_tabuleiro_camuflada = [["X" for x in range(5)] for x in self._coord_y]
         self._lista_embarcacoes_para_colocar = []
         self._lista_embarcacoes_vivas = []
 
@@ -61,18 +61,18 @@ class TabuleiroParte():
         copia_de_segurança = []
         copia_de_segurança = copy.deepcopy(self._area_tabuleiro)
 
-        if not(0 <= coord_xx < 10 and 0 <= coord_yy < 10):
+        if not(0 <= coord_xx < 5 and 0 <= coord_yy < 5):
             return False
         
         for i in range(len(embarcacao._formato)):
             for j in range(len(embarcacao._formato[i])):
                 if orientacao == "horizontal":
-                    if coord_yy + j >= 10 or self._area_tabuleiro[coord_xx + i][coord_yy + j] != 'X':
+                    if coord_yy + j >= 5 or self._area_tabuleiro[coord_xx + i][coord_yy + j] != 'X':
                         self._area_tabuleiro = copia_de_segurança
                         return False
                     self._area_tabuleiro[coord_xx + i][coord_yy + j] = embarcacao._formato[i][j]
                 elif orientacao == "vertical":
-                    if coord_xx + j >= 10 or self._area_tabuleiro[coord_xx + j][coord_yy + i] != 'X':
+                    if coord_xx + j >= 5 or self._area_tabuleiro[coord_xx + j][coord_yy + i] != 'X':
                         self._area_tabuleiro = copia_de_segurança
                         return False
                     self._area_tabuleiro[coord_xx + j][coord_yy + i] = embarcacao._formato[i][j]
@@ -89,7 +89,7 @@ class TabuleiroParte():
         coord_yy = coord_y - 1
         pos = self._area_tabuleiro[coord_xx][coord_yy]
          
-        if not(0 <= coord_xx < 10 and 0 <= coord_yy < 10):    
+        if not(0 <= coord_xx < 5 and 0 <= coord_yy < 5):    
             return False
         
         match pos:
