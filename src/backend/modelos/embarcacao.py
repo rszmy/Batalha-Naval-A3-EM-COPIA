@@ -35,10 +35,10 @@ class FabricaEmbarcacao():
                 return Embarcacao(nome, [
                     ["N", "N", "N"] 
                 ])
-            case "Navio Grande":
-                return Embarcacao(nome, [
-                    ["N", "N", "N", "N"]
-                ])
+            # case "Navio Grande":
+            #     return Embarcacao(nome, [
+            #         ["N", "N", "N", "N"]
+            #     ])
             case "Porta Aviões":
                 return Embarcacao(nome, [
                     ["N", "N", "N"],
