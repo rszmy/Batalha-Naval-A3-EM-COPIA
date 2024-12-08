@@ -1,1 +1,1 @@
-web: uvicorn src.backend.URLs:app --host 0.0.0.0 --port $PORT
+web: PYTHONPATH=src uvicorn backend.URLs:app --host 0.0.0.0 --port $PORT
