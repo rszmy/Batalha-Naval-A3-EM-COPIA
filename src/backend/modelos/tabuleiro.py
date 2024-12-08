@@ -119,26 +119,32 @@ class TabuleiroParte():
     
     def marcar_ultima_jogada(self, coord_xx: int, coord_yy: str):
 
-        for quadrante in self._area_tabuleiro:
-            if quadrante == "0":
-                 quadrante = "X"
-
-        for quadrante in self._area_tabuleiro_camuflada:
-            if quadrante == "0":
-                 quadrante = "X"
+        # Limpar as marcações anteriores no tabuleiro
+        for x in range(len(self._area_tabuleiro)):
+            for y in range(len(self._area_tabuleiro[x])):
+                if self._area_tabuleiro[x][y] == "0":
+                    self._area_tabuleiro[x][y] = "X"
+    
+        for x in range(len(self._area_tabuleiro_camuflada)):
+            for y in range(len(self._area_tabuleiro_camuflada[x])):
+                if self._area_tabuleiro_camuflada[x][y] == "0":
+                    self._area_tabuleiro_camuflada[x][y] = "X"
 
         self._area_tabuleiro[coord_xx][coord_yy] = "0"
         self._area_tabuleiro_camuflada[coord_xx][coord_yy] = self._area_tabuleiro[coord_xx][coord_yy]
 
     def marcar_embarcacao_acertada(self, coord_xx: int, coord_yy: str):
 
-        for quadrante in self._area_tabuleiro:
-            if quadrante == "0":
-                 quadrante = "X"
-
-        for quadrante in self._area_tabuleiro_camuflada:
-            if quadrante == "0":
-                 quadrante = "X"
+        # Limpar as marcações anteriores no tabuleiro
+        for x in range(len(self._area_tabuleiro)):
+            for y in range(len(self._area_tabuleiro[x])):
+                if self._area_tabuleiro[x][y] == "0":
+                    self._area_tabuleiro[x][y] = "X"
+        
+        for x in range(len(self._area_tabuleiro_camuflada)):
+            for y in range(len(self._area_tabuleiro_camuflada[x])):
+                if self._area_tabuleiro_camuflada[x][y] == "0":
+                    self._area_tabuleiro_camuflada[x][y] = "X"
 
         self._area_tabuleiro[coord_xx][coord_yy] = "9"
 
