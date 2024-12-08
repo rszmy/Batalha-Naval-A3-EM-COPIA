@@ -94,20 +94,46 @@ class TabuleiroParte():
         
         match pos:
                 case "X":
+                    self.marcar_ultima_jogada(coord_xx, coord_yy)
+                    return False
+                case "0":
+                    return False
+                case "9":
                     return False
                 case "1":
+                    self.marcar_embarcacao_acertada(coord_xx, coord_yy)
                     self.revelar_embarcacao(coord_xx, coord_yy)
                     return True
                 case "2":
+                    self.marcar_embarcacao_acertada(coord_xx, coord_yy)
                     self.revelar_embarcacao(coord_xx, coord_yy)
                     return True
                 case "3":
+                    self.marcar_embarcacao_acertada(coord_xx, coord_yy)
                     self.revelar_embarcacao(coord_xx, coord_yy)
                     return True
                 case "4":
+                    self.marcar_embarcacao_acertada(coord_xx, coord_yy)
                     self.revelar_embarcacao(coord_xx, coord_yy)
                     return True
     
+    def marcar_ultima_jogada(self, coord_xx: int, coord_yy: str):
+
+        for quadrante in self._area_tabuleiro:
+            if quadrante == "0":
+                 quadrante = "X"
+
+        self._area_tabuleiro[coord_xx][coord_yy] = "0"
+        self._area_tabuleiro_camuflada[coord_xx][coord_yy] = self._area_tabuleiro[coord_xx][coord_yy]
+
+    def marcar_embarcacao_acertada(self, coord_xx: int, coord_yy: str):
+
+        for quadrante in self._area_tabuleiro:
+            if quadrante == "0":
+                 quadrante = "X"
+
+        self._area_tabuleiro[coord_xx][coord_yy] = "9"
+
     def revelar_embarcacao(self, coord_xx: int, coord_yy: str):
         self._area_tabuleiro_camuflada[coord_xx][coord_yy] = self._area_tabuleiro[coord_xx][coord_yy]
 
