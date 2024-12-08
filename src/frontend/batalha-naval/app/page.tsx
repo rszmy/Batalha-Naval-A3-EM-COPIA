@@ -1,13 +1,15 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { useRouter } from 'next/navigation';
 
-const token = '123'
 
 export default function Fila() {
   const [nomeJogador, setNomeJogador] = useState("");
   const [jogadoresNaFila, setJogadoresNaFila] = useState([]);
   const [mensagem, setMensagem] = useState("");
+  const token = '123';
+  const router = useRouter();
 
   // Função para buscar jogadores na fila
   const fetchJogadoresNaFila = async () => {
@@ -26,15 +28,24 @@ export default function Fila() {
   // Função para entrar na fila
   const entrarNaFila = async () => {
     try {
-      const response = await fetch(`http://localhost:8000/fila/entrar/${nomeJogador}/?token=${token}`, {
-        method: "POST",
-      });
-      const data = await response.json();
-      setMensagem(data.message || "Você entrou na fila!");
-      fetchJogadoresNaFila(); // Atualizar a lista
+        const response = await fetch(`http://localhost:8000/fila/entrar/${nomeJogador}/?token=${token}`, {
+            method: "POST" 
+        });
+        const data = await response.json();
+
+        // Mensagem de feedback
+        setMensagem(data.message || "Você entrou na fila!");
+
+        // Verifica se a mensagem indica que a partida foi criada
+        if (data.message === "Você já está em uma partida" || data.message === "Você já está na fila"){ 
+          localStorage.setItem('nomeJogador', nomeJogador)
+          router.push(`/tabuleiro`); // Redireciona para a tela de partida
+        }
+
+        fetchJogadoresNaFila(); // Atualizar a lista
     } catch (error) {
-      setMensagem("Erro ao entrar na fila. Verifique os dados.");
-      console.error("Erro:", error);
+        setMensagem("Erro ao entrar na fila. Verifique os dados.");
+        console.error("Erro:", error);
     }
   };
 

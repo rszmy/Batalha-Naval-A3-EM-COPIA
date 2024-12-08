@@ -95,7 +95,16 @@ class TabuleiroParte():
         match pos:
                 case "X":
                     return False
-                case "N":
+                case "1":
+                    self.revelar_embarcacao(coord_xx, coord_yy)
+                    return True
+                case "2":
+                    self.revelar_embarcacao(coord_xx, coord_yy)
+                    return True
+                case "3":
+                    self.revelar_embarcacao(coord_xx, coord_yy)
+                    return True
+                case "4":
                     self.revelar_embarcacao(coord_xx, coord_yy)
                     return True
     
