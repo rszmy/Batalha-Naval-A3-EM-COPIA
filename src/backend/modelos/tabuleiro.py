@@ -123,12 +123,20 @@ class TabuleiroParte():
             if quadrante == "0":
                  quadrante = "X"
 
+        for quadrante in self._area_tabuleiro_camuflada:
+            if quadrante == "0":
+                 quadrante = "X"
+
         self._area_tabuleiro[coord_xx][coord_yy] = "0"
         self._area_tabuleiro_camuflada[coord_xx][coord_yy] = self._area_tabuleiro[coord_xx][coord_yy]
 
     def marcar_embarcacao_acertada(self, coord_xx: int, coord_yy: str):
 
         for quadrante in self._area_tabuleiro:
+            if quadrante == "0":
+                 quadrante = "X"
+
+        for quadrante in self._area_tabuleiro_camuflada:
             if quadrante == "0":
                  quadrante = "X"
 
