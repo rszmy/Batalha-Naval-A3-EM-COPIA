@@ -25,15 +25,15 @@ class FabricaEmbarcacao():
         match nome:
             case "Submarino":
                 return Embarcacao(nome, [
-                    ["N"]
+                    ["1"]
                 ])
             case "Navio Pequeno":
                 return Embarcacao(nome, [
-                    ["N", "N"]
+                    ["2", "2"]
                 ])
             case "Navio Médio":
                 return Embarcacao(nome, [
-                    ["N", "N", "N"] 
+                    ["3", "3", "3"] 
                 ])
             # case "Navio Grande":
             #     return Embarcacao(nome, [
@@ -41,9 +41,9 @@ class FabricaEmbarcacao():
             #     ])
             case "Porta Aviões":
                 return Embarcacao(nome, [
-                    ["N", "N", "N"],
-                    ["X", "N", "X"],
-                    ["X", "N", "X"]
+                    ["4", "4", "4"],
+                    ["X", "4", "X"],
+                    ["X", "4", "X"]
                 ])
             case _:
                 return None
