@@ -7,6 +7,12 @@ export default function Home() {
   const [tabuleiros, setTabuleiros] = useState<string[][] | null>(null);
   const [loading, setLoading] = useState(true);
   const [nomeJogador, setNomeJogador] = useState<string | undefined>(undefined);
+  const [inputs, setInputs] = useState({
+    embarcacao: '',
+    coordX: '',
+    coordY: '',
+    orientacao: '',
+  });
 
   const router = useRouter();
   const [isClient, setIsClient] = useState(false);
@@ -65,6 +71,37 @@ export default function Home() {
 
     fetchTabuleiros();
   }, [id, nomeJogador]);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setInputs(prev => ({ ...prev, [name]: value }));
+  };
+
+  const handleSubmit = async () => {
+    const { embarcacao, coordX, coordY, orientacao } = inputs;
+    try {
+      const url = `http://127.0.0.1:8000/partida/tabuleiro/peças/${id}/${nomeJogador}/${embarcacao}/${coordX}/${coordY}/${orientacao}/?token=${token}`;
+      const response = await fetch(url, {
+        method: 'PATCH',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      if (!response.ok) {
+        throw new Error('Erro ao enviar os dados para a API');
+      }
+            const updatedResponse = await fetch(
+        `http://127.0.0.1:8000/partida/tabuleiro/${id}/${nomeJogador}/?token=${token}`
+      );
+      const updatedData: string[][] = await updatedResponse.json();
+      const tabuleirosProcessados = updatedData.map(tabuleiro =>
+        tabuleiro.map(linha => linha.split(''))
+      );
+      setTabuleiros(tabuleirosProcessados);
+    } catch (error) {
+      console.error('Erro:', error);
+    }
+  };
 
   if (loading) {
     return <div>Carregando...</div>;
@@ -141,15 +178,36 @@ export default function Home() {
   };
 
   return (
-    <div style={{ display: 'flex', justifyContent: 'space-around', padding: '20px' }}>
-      <div>
-        <h2>Meu Tabuleiro</h2>
-        {renderizarTabuleiro(tabuleiros[0])}
+  <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', padding: '20px' }}>
+    <div style={{ display: 'flex', justifyContent: 'space-around', width: '100%' }}>
+        <div>
+          <h2>Meu Tabuleiro</h2>
+          {renderizarTabuleiro(tabuleiros[0])}
+        </div>
+        <div>
+          <h2>Tabuleiro do Inimigo</h2>
+          {renderizarTabuleiro(tabuleiros[1])}
+        </div>
       </div>
-      <div>
-        <h2>Tabuleiro do Inimigo</h2>
-        {renderizarTabuleiro(tabuleiros[1])}
+
+      <div style={{ marginTop: '20px', textAlign: 'center' }}>
+        <h2>Coloque as embarcações</h2>
+        {['embarcacao', 'coordX', 'coordY', 'orientacao'].map((field) => (
+        <div key={field} style={{ marginBottom: '10px' }}>
+          <input
+            type="text"
+            name={field}
+            placeholder={`Digite ${field}`}
+            value={inputs[field as keyof typeof inputs]}
+            onChange={handleInputChange}
+            style={{ padding: '5px', width: '200px' }}
+          />
       </div>
+      ))}
+      <button onClick={handleSubmit} style={{ padding: '10px 20px', marginTop: '10px' }}>
+        Enviar
+      </button>
     </div>
+  </div>
   );
 }
