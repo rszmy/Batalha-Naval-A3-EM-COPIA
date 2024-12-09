@@ -179,6 +179,16 @@ class PartidaControlador:
                 return  {"message": "Não é seu turno ainda"}
         elif (jogador_a != nome_jogador and jogador_b != nome_jogador): 
             return {"message": "Jogador não pertence ao jogo"}
+        elif (status == "terminada"):
+
+            tabuleiro = cls.pegar_tabuleiro_por_id(id)
+            checagem_a = TabuleiroControlador.comparar_tabuleiros_por_parte(tabuleiro, "a")
+            checagem_b = TabuleiroControlador.comparar_tabuleiros_por_parte(tabuleiro, "b")
+
+            if checagem_a == True:
+                return {"message": "A partida foi encerrada. O vencedor é {}".format(jogador_b)}
+            elif checagem_b == True:
+                return {"message": "A partida foi encerrada. O vencedor é {}".format(jogador_a)}
         
         return {"message": "Você não pode realizar disparos na fase de preparação"}
 
