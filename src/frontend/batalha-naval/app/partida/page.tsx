@@ -8,7 +8,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [nomeJogador, setNomeJogador] = useState<string | undefined>(undefined);
   const [inputs, setInputs] = useState({ coordX: '', coordY: '' });
-  const [message, setMessage] = useState<string>(''); // Novo estado para exibir mensagens
+  const [message, setMessage] = useState<string>(''); // Estado para exibir mensagens
   const router = useRouter();
   const [isClient, setIsClient] = useState(false);
 
@@ -82,6 +82,13 @@ export default function Home() {
 
       const data = await response.json();
       setMessage(data.message || 'Erro ao realizar o disparo'); // Armazena a mensagem recebida
+
+      if (data.message?.toLowerCase().includes('a partida foi encerrada')) {
+        // Redirecionar após 10 segundos
+        setTimeout(() => {
+          router.push(`/`);
+        }, 10000);
+      }
 
       if (response.ok) {
         // Atualiza o tabuleiro após o disparo
