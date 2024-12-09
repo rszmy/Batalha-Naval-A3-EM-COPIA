@@ -40,32 +40,33 @@ export default function Home() {
     }
   }, [isClient, router]);
 
-  useEffect(() => {
+  const fetchTabuleiros = async () => {
     if (!nomeJogador) return;
 
-    const fetchTabuleiros = async () => {
-      try {
-        const url = `http://127.0.0.1:8000/partida/tabuleiro/${id}/${nomeJogador}/?token=${token}`;
-        const response = await fetch(url);
-        if (!response.ok) {
-          throw new Error('Erro ao buscar os tabuleiros');
-        }
-        const data: string[][] = await response.json();
-
-        const tabuleirosProcessados = data.map(tabuleiro =>
-          tabuleiro.map(linha => linha.split(''))
-        );
-
-        setTabuleiros(tabuleirosProcessados);
-      } catch (error) {
-        console.error('Erro:', error);
-      } finally {
-        setLoading(false);
+    try {
+      const url = `http://127.0.0.1:8000/partida/tabuleiro/${id}/${nomeJogador}/?token=${token}`;
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error('Erro ao buscar os tabuleiros');
       }
-    };
+      const data: string[][] = await response.json();
 
+      const tabuleirosProcessados = data.map(tabuleiro =>
+        tabuleiro.map(linha => linha.split(''))
+      );
+
+      setTabuleiros(tabuleirosProcessados);
+    } catch (error) {
+      console.error('Erro:', error);
+      setMessage('Erro ao atualizar os tabuleiros.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
     fetchTabuleiros();
-  }, [id, nomeJogador]);
+  }, [nomeJogador]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -84,14 +85,7 @@ export default function Home() {
 
       if (response.ok) {
         // Atualiza o tabuleiro após o disparo
-        const updatedResponse = await fetch(
-          `http://127.0.0.1:8000/partida/tabuleiro/${id}/${nomeJogador}/?token=${token}`
-        );
-        const updatedData: string[][] = await updatedResponse.json();
-        const tabuleirosProcessados = updatedData.map(tabuleiro =>
-          tabuleiro.map(linha => linha.split(''))
-        );
-        setTabuleiros(tabuleirosProcessados);
+        await fetchTabuleiros();
       }
     } catch (error) {
       setMessage('Erro ao realizar o disparo.');
@@ -197,6 +191,12 @@ export default function Home() {
         ))}
         <button onClick={handleSubmit} style={{ padding: '10px 20px', marginTop: '10px' }}>
           Disparar
+        </button>
+        <button
+          onClick={fetchTabuleiros}
+          style={{ padding: '10px 20px', marginTop: '10px', marginLeft: '10px' }}
+        >
+          Atualizar Tabuleiro
         </button>
         {message && (
           <p style={{ marginTop: '20px', color: message.includes('Erro') ? 'red' : 'green' }}>
