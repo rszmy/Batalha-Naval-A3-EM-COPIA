@@ -18,7 +18,8 @@ class PartidaDB():
     
     @classmethod
     def terminar_partida_por_id(cls, id: int):
-        cls.get_instance()._lista_de_partidas = [p for p in  cls.get_instance()._lista_de_partidas if p._id != id]
+        cls.get_instance().atualizar_status_por_id(id, "terminada")
+        # cls.get_instance()._lista_de_partidas = [p for p in  cls.get_instance()._lista_de_partidas if p._id != id]
     
     @classmethod
     def checar_jogador_em_partida(cls, nome_jogador: str):
