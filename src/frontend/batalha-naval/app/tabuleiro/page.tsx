@@ -15,9 +15,9 @@ export default function Home() {
   });
   const [embarcacoesRestantes, setEmbarcacoesRestantes] = useState({
     Submarino: 2,
-    'Navio Pequeno': 1,
-    'Navio Médio': 1,
-    'Porta Aviões': 1,
+    NavioPequeno: 1,
+    NavioMédio: 1,
+    PortaAviões: 1,
   });
   
   const [message, setMessage] = useState<string>('');
@@ -237,7 +237,10 @@ export default function Home() {
             />
           </div>
         ))}
-        {message && (<p>
+        {message && (<p style={{
+          color: message === 'Peça colocada' ? 'green' : 'red',
+          fontWeight: 'bold',
+        }}>
           {message}
         </p>)}
         <button onClick={handleSubmit} style={{ padding: '10px 20px', marginTop: '10px' }}>
