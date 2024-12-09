@@ -26,14 +26,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <h1>Sistema : Menu</h1>
+        <h1>Menu</h1>
           <nav>
             <ul>
               <li>
                 <Link href= "/">Home</Link>
               </li>
               <li>
-                <Link href= "/login">Login</Link>
+                <Link href= "/partida">Partida</Link>
                 </li>
               <li>
                 <Link href= "/registro">Registro</Link>

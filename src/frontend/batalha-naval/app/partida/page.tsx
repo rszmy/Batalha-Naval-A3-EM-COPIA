@@ -8,16 +8,8 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [nomeJogador, setNomeJogador] = useState<string | undefined>(undefined);
   const [inputs, setInputs] = useState({
-    embarcacao: '',
     coordX: '',
     coordY: '',
-    orientacao: '',
-  });
-  const [embarcacoesRestantes, setEmbarcacoesRestantes] = useState({
-    submarino: 2,
-    pequeno: 1,
-    medio: 1,
-    portaAvioes: 1,
   });
 
   const router = useRouter();
@@ -31,6 +23,8 @@ export default function Home() {
     '2': '#00008B',
     '3': '#1E90FF',
     '4': '#A9A9A9',
+    '0': 'yellow' ,
+    '9': 'red',
     'default': '#40E0D0',
   };
 
@@ -44,7 +38,7 @@ export default function Home() {
       if (storedNomeJogador) {
         setNomeJogador(storedNomeJogador);
       } else {
-        router.push(`/`); // Se o nome do jogador não for encontrado, redireciona para a página inicial
+        router.push(`/`);
       }
     }
   }, [isClient, router]);
@@ -66,18 +60,6 @@ export default function Home() {
         );
 
         setTabuleiros(tabuleirosProcessados);
-
-        // Verifica se todas as embarcações foram posicionadas
-        const todasPosicionadas = Object.values(embarcacoesRestantes).every(quantidade => quantidade === 0);
-        
-        // Se todas as embarcações foram posicionadas, redireciona o jogador
-        if (todasPosicionadas) {
-          const dataResponse = await response.json();
-          if (dataResponse.message === "Embarcações posicionadas" || todasPosicionadas) {
-            localStorage.setItem('nomeJogador', nomeJogador);
-            router.push('/partida'); // Redireciona para a tela de partida
-          }
-        }
       } catch (error) {
         console.error('Erro:', error);
       } finally {
@@ -86,7 +68,7 @@ export default function Home() {
     };
 
     fetchTabuleiros();
-  }, [id, nomeJogador, embarcacoesRestantes, router]);
+  }, [id, nomeJogador]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -94,24 +76,15 @@ export default function Home() {
   };
 
   const handleSubmit = async () => {
-    const { embarcacao, coordX, coordY, orientacao } = inputs;
-
-    if (embarcacoesRestantes[embarcacao as keyof typeof embarcacoesRestantes] <= 0) {
-      alert(`Todas as embarcações do tipo ${embarcacao} já foram colocadas.`);
-      return;
-    }
+    const { coordX, coordY } = inputs;
 
     try {
-      const url = `http://127.0.0.1:8000/partida/tabuleiro/peças/${id}/${nomeJogador}/${embarcacao}/${coordX}/${coordY}/${orientacao}/?token=${token}`;
-      const response = await fetch(url, {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-      });
+      const url = `http://127.0.0.1:8000/partida/tabuleiro/disparo/${id}/${nomeJogador}/${coordX}/${coordY}?token=${token}`;
+      const response = await fetch(url);
       if (!response.ok) {
-        throw new Error('Erro ao enviar os dados para a API');
+        throw new Error('Erro ao realizar o disparo');
       }
+
       const updatedResponse = await fetch(
         `http://127.0.0.1:8000/partida/tabuleiro/${id}/${nomeJogador}/?token=${token}`
       );
@@ -120,22 +93,9 @@ export default function Home() {
         tabuleiro.map(linha => linha.split(''))
       );
       setTabuleiros(tabuleirosProcessados);
-
-      // Atualiza a quantidade de embarcações restantes
-      setEmbarcacoesRestantes(prev => ({
-        ...prev,
-        [embarcacao]: Math.max(prev[embarcacao as keyof typeof prev] - 1, 0),
-      }));
     } catch (error) {
       console.error('Erro:', error);
     }
-  };
-
-  const mostrarEmbarcacoesRestantes = () => {
-    const mensagem = Object.entries(embarcacoesRestantes)
-      .map(([tipo, quantidade]) => `${tipo}: ${quantidade} restantes`)
-      .join('\n');
-    alert(`Embarcações restantes:\n${mensagem}`);
   };
 
   if (loading) {
@@ -214,11 +174,15 @@ export default function Home() {
           <h2>Meu Tabuleiro</h2>
           {renderizarTabuleiro(tabuleiros[0])}
         </div>
+	<div>
+          <h2>Tabuleiro do Inimigo</h2>
+          {renderizarTabuleiro(tabuleiros[1])}
+        </div>
       </div>
 
       <div style={{ marginTop: '20px', textAlign: 'center' }}>
-        <h2>Coloque as embarcações</h2>
-        {['embarcacao', 'coordX', 'coordY', 'orientacao'].map(field => (
+        <h2>Realizar Disparo</h2>
+        {['coordX', 'coordY'].map(field => (
           <div key={field} style={{ marginBottom: '10px' }}>
             <input
               type="text"
@@ -231,16 +195,9 @@ export default function Home() {
           </div>
         ))}
         <button onClick={handleSubmit} style={{ padding: '10px 20px', marginTop: '10px' }}>
-          Enviar
-        </button>
-        <button
-          onClick={mostrarEmbarcacoesRestantes}
-          style={{ padding: '10px 20px', marginTop: '10px', marginLeft: '10px' }}
-        >
-          Mostrar Embarcações Restantes
+          Disparar
         </button>
       </div>
     </div>
   );
 }
-
