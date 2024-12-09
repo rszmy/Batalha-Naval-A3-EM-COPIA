@@ -1,21 +1,19 @@
-import sqlite3
 import os
+import sqlite3
 
-# Classe para configuração do banco de dados SQLite
-class ConfigDB():
-    # Obtém o caminho absoluto do banco de dados
-    BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-    DATABASE_PATH = os.path.join(BASE_DIR, "batalha_naval.sqlite")
+class ConfigDB:
+    # Lê a variável de ambiente DATABASE_PATH, ou usa um caminho padrão se não estiver configurado
+    DATABASE_PATH = os.getenv("DATABASE_PATH", "batalha_naval.sqlite")
 
     @classmethod
     def executa_sql(cls, codigo_sql, valores):
-        with sqlite3.connect(cls.DATABASE_PATH) as conn:
-            try:
+        try:
+            with sqlite3.connect(cls.DATABASE_PATH) as conn:
                 cursor = conn.cursor()
                 if valores:
                     return cursor.execute(codigo_sql, valores)
                 else:
                     return cursor.execute(codigo_sql)
-            except sqlite3.Error as e:
-                print(f"Erro ao executar SQL: {e}")
-                return None
+        except sqlite3.Error as e:
+            print(f"Erro ao acessar o banco de dados: {e}")
+            return None
