@@ -14,11 +14,13 @@ export default function Home() {
     orientacao: '',
   });
   const [embarcacoesRestantes, setEmbarcacoesRestantes] = useState({
-    submarino: 2,
-    pequeno: 1,
-    medio: 1,
-    portaAvioes: 1,
+    Submarino: 2,
+    'Navio Pequeno': 1,
+    'Navio Médio': 1,
+    'Porta Aviões': 1,
   });
+  
+  const [message, setMessage] = useState<string>('');
 
   const router = useRouter();
   const [isClient, setIsClient] = useState(false);
@@ -109,6 +111,10 @@ export default function Home() {
           'Content-Type': 'application/json',
         },
       });
+
+      const data = await response.json();
+      setMessage(data.message)
+
       if (!response.ok) {
         throw new Error('Erro ao enviar os dados para a API');
       }
@@ -126,6 +132,7 @@ export default function Home() {
         ...prev,
         [embarcacao]: Math.max(prev[embarcacao as keyof typeof prev] - 1, 0),
       }));
+
     } catch (error) {
       console.error('Erro:', error);
     }
@@ -230,6 +237,9 @@ export default function Home() {
             />
           </div>
         ))}
+        {message && (<p>
+          {message}
+        </p>)}
         <button onClick={handleSubmit} style={{ padding: '10px 20px', marginTop: '10px' }}>
           Enviar
         </button>
