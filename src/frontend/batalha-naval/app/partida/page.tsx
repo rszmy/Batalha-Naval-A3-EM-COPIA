@@ -7,11 +7,8 @@ export default function Home() {
   const [tabuleiros, setTabuleiros] = useState<string[][] | null>(null);
   const [loading, setLoading] = useState(true);
   const [nomeJogador, setNomeJogador] = useState<string | undefined>(undefined);
-  const [inputs, setInputs] = useState({
-    coordX: '',
-    coordY: '',
-  });
-
+  const [inputs, setInputs] = useState({ coordX: '', coordY: '' });
+  const [message, setMessage] = useState<string>(''); // Novo estado para exibir mensagens
   const router = useRouter();
   const [isClient, setIsClient] = useState(false);
 
@@ -23,9 +20,9 @@ export default function Home() {
     '2': '#00008B',
     '3': '#1E90FF',
     '4': '#A9A9A9',
-    '0': 'yellow' ,
+    '0': 'yellow',
     '9': 'red',
-    'default': '#40E0D0',
+    default: '#40E0D0',
   };
 
   useEffect(() => {
@@ -81,19 +78,23 @@ export default function Home() {
     try {
       const url = `http://127.0.0.1:8000/partida/tabuleiro/disparo/${id}/${nomeJogador}/${coordX}/${coordY}?token=${token}`;
       const response = await fetch(url);
-      if (!response.ok) {
-        throw new Error('Erro ao realizar o disparo');
-      }
 
-      const updatedResponse = await fetch(
-        `http://127.0.0.1:8000/partida/tabuleiro/${id}/${nomeJogador}/?token=${token}`
-      );
-      const updatedData: string[][] = await updatedResponse.json();
-      const tabuleirosProcessados = updatedData.map(tabuleiro =>
-        tabuleiro.map(linha => linha.split(''))
-      );
-      setTabuleiros(tabuleirosProcessados);
+      const data = await response.json();
+      setMessage(data.message || 'Erro ao realizar o disparo'); // Armazena a mensagem recebida
+
+      if (response.ok) {
+        // Atualiza o tabuleiro após o disparo
+        const updatedResponse = await fetch(
+          `http://127.0.0.1:8000/partida/tabuleiro/${id}/${nomeJogador}/?token=${token}`
+        );
+        const updatedData: string[][] = await updatedResponse.json();
+        const tabuleirosProcessados = updatedData.map(tabuleiro =>
+          tabuleiro.map(linha => linha.split(''))
+        );
+        setTabuleiros(tabuleirosProcessados);
+      }
     } catch (error) {
+      setMessage('Erro ao realizar o disparo.');
       console.error('Erro:', error);
     }
   };
@@ -174,7 +175,7 @@ export default function Home() {
           <h2>Meu Tabuleiro</h2>
           {renderizarTabuleiro(tabuleiros[0])}
         </div>
-	<div>
+        <div>
           <h2>Tabuleiro do Inimigo</h2>
           {renderizarTabuleiro(tabuleiros[1])}
         </div>
@@ -197,6 +198,11 @@ export default function Home() {
         <button onClick={handleSubmit} style={{ padding: '10px 20px', marginTop: '10px' }}>
           Disparar
         </button>
+        {message && (
+          <p style={{ marginTop: '20px', color: message.includes('Erro') ? 'red' : 'green' }}>
+            {message}
+          </p>
+        )}
       </div>
     </div>
   );
