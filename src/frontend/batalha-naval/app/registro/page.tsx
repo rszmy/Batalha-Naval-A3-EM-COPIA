@@ -13,7 +13,7 @@ export default function Register() {
 
     try {
       // Montar a URL dinâmica
-      const url = `http://localhost:8000/jogadores/registro/${name}/${email}/${password}`;
+      const url = `https://web-production-cc859.up.railway.app/jogadores/registro/${name}/${email}/${password}`;
 
       // Fazer a requisição para o backend
       const response = await fetch(url, {
