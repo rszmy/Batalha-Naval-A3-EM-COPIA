@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from 'next/navigation';
 
 
-export default function Fila() {
+export default function Home() {
   const [nomeJogador, setNomeJogador] = useState("");
   const [jogadoresNaFila, setJogadoresNaFila] = useState([]);
   const [mensagem, setMensagem] = useState("");
