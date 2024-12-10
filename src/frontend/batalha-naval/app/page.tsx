@@ -87,7 +87,7 @@ export default function Home() {
       {mensagem && <p>{mensagem}</p>}
 
       {/* Botão para checar o status da partida */}
-      <div style={{ marginBottom: "20px" }}>
+      <div style={{ marginBottom: "20px", backgroundColor: "gray" }}>
         <h2>Checar Status da Partida</h2>
         <button onClick={checarStatusPartida}>Checar</button>
       </div>
