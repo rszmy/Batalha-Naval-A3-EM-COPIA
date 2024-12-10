@@ -3,7 +3,6 @@
     {"src": "URLs:app", "use": "@now/python"},
     {"src": "frontend/batalha-naval/package.json", "use" : "@vercel/next"}
   ],
-  "rootDirectory": "frontend/batalha-naval",
   
   "routes": [
     {"src": "/(.*)", "dest": "URLs:app"}
