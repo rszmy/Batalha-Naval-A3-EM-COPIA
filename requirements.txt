@@ -1,3 +1,9 @@
 # dependências do projeto
 fastapi >= 0.104.1
 uvicorn[standard]
+
+# requirements do front
+# nextjs
+# react
+# tailwind css
+
