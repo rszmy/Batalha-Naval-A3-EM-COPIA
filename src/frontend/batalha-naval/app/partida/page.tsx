@@ -55,6 +55,7 @@ export default function Home() {
         tabuleiro.map(linha => linha.split(''))
       );
 
+      {/* @ts-ignore */}
       setTabuleiros(tabuleirosProcessados);
     } catch (error) {
       console.error('Erro:', error);
@@ -155,8 +156,8 @@ export default function Home() {
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
-                  backgroundColor: cor[celula] || cor.default,
-                  color: cor[celula] ? 'white' : 'white',
+                  backgroundColor: cor[celula as keyof typeof cor] || cor.default,
+                  color: cor[celula as keyof typeof cor] ? 'white' : 'white',
                   margin: '1px',
                 }}
               >
@@ -174,10 +175,12 @@ export default function Home() {
       <div style={{ display: 'flex', justifyContent: 'space-around', width: '100%' }}>
         <div>
           <h2>Meu Tabuleiro</h2>
+          {/* @ts-ignore */}
           {renderizarTabuleiro(tabuleiros[0])}
         </div>
         <div>
           <h2>Tabuleiro do Inimigo</h2>
+          {/* @ts-ignore */}
           {renderizarTabuleiro(tabuleiros[1])}
         </div>
       </div>

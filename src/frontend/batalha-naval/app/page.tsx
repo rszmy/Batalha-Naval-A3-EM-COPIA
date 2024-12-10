@@ -98,7 +98,10 @@ export default function Fila() {
         {jogadoresNaFila.length > 0 ? (
           <ul>
             {jogadoresNaFila.map((jogador, index) => (
-              <li key={index}>{jogador.nome}</li>
+              <li key={index}>
+                {/* @ts-ignore */}
+                {jogador.nome}
+                </li>
             ))}
           </ul>
         ) : (
