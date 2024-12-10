@@ -61,23 +61,39 @@ class TabuleiroParte():
         copia_de_segurança = []
         copia_de_segurança = copy.deepcopy(self._area_tabuleiro)
 
-        if not(0 <= coord_xx < 5 and 0 <= coord_yy < 5):
+        # Verificar se as coordenadas iniciais estão dentro do tabuleiro
+        if not (0 <= coord_xx < len(self._area_tabuleiro) and 0 <= coord_yy < len(self._area_tabuleiro[0])):
             return False
         
-        for i in range(len(embarcacao._formato)):
-            for j in range(len(embarcacao._formato[i])):
+        # Determinar os tamanhos do formato da embarcação
+        altura = len(embarcacao._formato)  # Quantidade de linhas no formato
+        largura = len(embarcacao._formato[0])  # Quantidade de colunas no formato
+
+        # Verificar limites do tabuleiro com base na orientação
+        if orientacao == "horizontal":
+            if coord_yy + largura > len(self._area_tabuleiro[0]) or coord_xx + altura > len(self._area_tabuleiro):
+                return False
+        elif orientacao == "vertical":
+            if coord_xx + largura > len(self._area_tabuleiro) or coord_yy + altura > len(self._area_tabuleiro[0]):
+                return False
+        else:
+            return False
+        
+        # Verificar sobreposição e posicionar a embarcação
+        for i in range(altura):
+            for j in range(largura):
                 if orientacao == "horizontal":
-                    if coord_yy + j >= 5 or self._area_tabuleiro[coord_xx + i][coord_yy + j] != 'X':
-                        self._area_tabuleiro = copia_de_segurança
-                        return False
-                    self._area_tabuleiro[coord_xx + i][coord_yy + j] = embarcacao._formato[i][j]
+                    if embarcacao._formato[i][j] != "X":  # Apenas processar células relevantes
+                        if self._area_tabuleiro[coord_xx + i][coord_yy + j] != "X":
+                            self._area_tabuleiro = copia_de_segurança
+                            return False
+                        self._area_tabuleiro[coord_xx + i][coord_yy + j] = embarcacao._formato[i][j]
                 elif orientacao == "vertical":
-                    if coord_xx + j >= 5 or self._area_tabuleiro[coord_xx + j][coord_yy + i] != 'X':
-                        self._area_tabuleiro = copia_de_segurança
-                        return False
-                    self._area_tabuleiro[coord_xx + j][coord_yy + i] = embarcacao._formato[i][j]
-                else:
-                    return False
+                    if embarcacao._formato[i][j] != "X":  # Apenas processar células relevantes
+                        if self._area_tabuleiro[coord_xx + j][coord_yy + i] != "X":
+                            self._area_tabuleiro = copia_de_segurança
+                            return False
+                        self._area_tabuleiro[coord_xx + j][coord_yy + i] = embarcacao._formato[i][j]
         
         return True
         
@@ -94,11 +110,47 @@ class TabuleiroParte():
         
         match pos:
                 case "X":
+                    self.marcar_ultima_jogada(coord_xx, coord_yy)
                     return False
-                case "N":
+                case "0" | "9":
+                    return False
+                case "1" | "2" | "3" | "4":
+                    # Casos que marcam embarcação e revelam
+                    self.marcar_embarcacao_acertada(coord_xx, coord_yy)
                     self.revelar_embarcacao(coord_xx, coord_yy)
                     return True
     
+    def marcar_ultima_jogada(self, coord_xx: int, coord_yy: str):
+
+        # Limpar as marcações anteriores no tabuleiro
+        for x in range(len(self._area_tabuleiro)):
+            for y in range(len(self._area_tabuleiro[x])):
+                if self._area_tabuleiro[x][y] == "0":
+                    self._area_tabuleiro[x][y] = "X"
+    
+        for x in range(len(self._area_tabuleiro_camuflada)):
+            for y in range(len(self._area_tabuleiro_camuflada[x])):
+                if self._area_tabuleiro_camuflada[x][y] == "0":
+                    self._area_tabuleiro_camuflada[x][y] = "X"
+
+        self._area_tabuleiro[coord_xx][coord_yy] = "0"
+        self._area_tabuleiro_camuflada[coord_xx][coord_yy] = self._area_tabuleiro[coord_xx][coord_yy]
+
+    def marcar_embarcacao_acertada(self, coord_xx: int, coord_yy: str):
+
+        # Limpar as marcações anteriores no tabuleiro
+        for x in range(len(self._area_tabuleiro)):
+            for y in range(len(self._area_tabuleiro[x])):
+                if self._area_tabuleiro[x][y] == "0":
+                    self._area_tabuleiro[x][y] = "X"
+        
+        for x in range(len(self._area_tabuleiro_camuflada)):
+            for y in range(len(self._area_tabuleiro_camuflada[x])):
+                if self._area_tabuleiro_camuflada[x][y] == "0":
+                    self._area_tabuleiro_camuflada[x][y] = "X"
+
+        self._area_tabuleiro[coord_xx][coord_yy] = "9"
+
     def revelar_embarcacao(self, coord_xx: int, coord_yy: str):
         self._area_tabuleiro_camuflada[coord_xx][coord_yy] = self._area_tabuleiro[coord_xx][coord_yy]
 

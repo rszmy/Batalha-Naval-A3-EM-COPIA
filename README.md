@@ -8,3 +8,13 @@ Jogo de batalha naval desenvolvido para o projeto A3 da Unidade Curricular de Es
 - Para finalizar é preciso sair da pasta src e entrar na pasta database e executar o arquivo python (\database\init_db.py) que gera um arquivo onde esta localizada o nosso banco de dados, com ele pronto é só arrastar ele para a root do código e esta pronto para rodar.
 
 - Para rodar basta entrar na pasta \src\backend\ e utilizar o comando "uvicorn.exe URLs:app --reload".
+
+- ============================================================================================================
+
+- Frontend
+
+- Deve já possuir nodejs instalado ná maquina.
+
+- Dentro de \src\frontend\batalha-naval de o comonda npm install next para instalar dependecias do next.
+
+- Iniciar frontend comand npm run dev (estar dentro no caminho: src\fronend\batalha-naval).
