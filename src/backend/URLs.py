@@ -1,10 +1,10 @@
 #from typing import Union
 from fastapi import FastAPI, Request, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
-from src.backend.controladores.jogador_controlador import JogadorControlador
-from src.backend.controladores.autenticacao_controlador import AutenticacaoControlador
-from src.backend.controladores.fila_controlador import FilaControlador
-from src.backend.controladores.partida_controlador import PartidaControlador
+from controladores.jogador_controlador import JogadorControlador
+from controladores.autenticacao_controlador import AutenticacaoControlador
+from controladores.fila_controlador import FilaControlador
+from controladores.partida_controlador import PartidaControlador
 import uvicorn
 
 
