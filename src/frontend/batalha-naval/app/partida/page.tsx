@@ -45,6 +45,7 @@ export default function Home() {
 
     try {
       const url = `https://web-production-cc859.up.railway.app/partida/tabuleiro/${id}/${nomeJogador}`;
+
       const response = await fetch(url);
       if (!response.ok) {
         throw new Error('Erro ao buscar os tabuleiros');
@@ -77,6 +78,7 @@ export default function Home() {
     const { coordX, coordY } = inputs;
 
     try {
+
       const url = `https://web-production-cc859.up.railway.app/partida/tabuleiro/disparo/${id}/${nomeJogador}/${coordX}/${coordY}`;
       const response = await fetch(url);
 
