@@ -9,7 +9,7 @@ function ListaDeJogadores() {
   useEffect(() => {
     const fetchJogadores = async () => {
       try {
-        const response = await fetch('http://localhost:8000/jogadores/lista_de_jogadores');
+        const response = await fetch('https://web-production-cc859.up.railway.app/jogadores/lista_de_jogadores');
         console.log('Response status:', response.status); 
         console.log('Response headers:', response.headers); 
         if (!response.ok) {
